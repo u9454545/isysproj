@@ -4,17 +4,17 @@ const router = express.Router();
 const Product = require('../models/productModel'); // You should have a Product model defined
 
 // Route to get a list of all products
-router.get('/products', async (req, res) => {
+const getAllProducts = async (req, res) => {
   try {
     const products = await Product.find(); // Fetch products from your database
     res.json(products);
   } catch (err) {
     res.status(500).json({ message: 'Internal Server Error' });
   }
-});
+};
 
 // Route to get details of a specific product by ID
-router.get('/products/:id', async (req, res) => {
+const getAllProductsID = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id); // Fetch product by ID
     if (!product) {
@@ -24,10 +24,10 @@ router.get('/products/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: 'Internal Server Error' });
   }
-});
+};
 
 // Route to add a new product (admin only)
-router.post('/products', async (req, res) => {
+const postNewProduct = async (req, res) => {
   // Check if the user making the request is an admin
   if (!req.user || !req.user.isAdmin) {
     return res.status(403).json({ message: 'Forbidden: Admin access required' });
@@ -46,10 +46,10 @@ router.post('/products', async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: 'Internal Server Error' });
   }
-});
+};
 
 // Route to update a product (admin only)
-router.put('/products/:id', async (req, res) => {
+const putUpdateProduct = async (req, res) => {
   // Check if the user making the request is an admin
   if (!req.user || !req.user.isAdmin) {
     return res.status(403).json({ message: 'Forbidden: Admin access required' });
@@ -64,10 +64,10 @@ router.put('/products/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: 'Internal Server Error' });
   }
-});
+};
 
 // Route to delete a product (admin only)
-router.delete('/products/:id', async (req, res) => {
+const deleteProduct = async (req, res) => {
   // Check if the user making the request is an admin
   if (!req.user || !req.user.isAdmin) {
     return res.status(403).json({ message: 'Forbidden: Admin access required' });
@@ -82,8 +82,12 @@ router.delete('/products/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: 'Internal Server Error' });
   }
-});
+};
  
 module.exports = {
-  
+  getAllProducts,
+  getAllProductsID,
+  postNewProduct,
+  putUpdateProduct,
+  deleteProduct
 };
