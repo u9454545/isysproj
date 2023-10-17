@@ -49,7 +49,7 @@ const loginUser = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
-
+ 
     // Generate a JWT token for authentication
     const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
 
