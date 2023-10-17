@@ -106,6 +106,38 @@ const processOrder = async (req, res) => {
   }
 };
 
+// Get all orders
+const getAllOrders = async (req, res) => {
+  try {
+    // Find all orders
+    const orders = await Order.find();
+
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error('Error getting all orders:', error);
+    res.status(500).json({ error: 'Failed to get all orders' });
+  }
+};
+
+// Delete an order by ID
+const deleteOrder = async (req, res) => {
+  try {
+    const orderId = req.params.id;
+
+    // Find and delete the order by ID
+    const deletedOrder = await Order.findByIdAndDelete(orderId);
+
+    if (!deletedOrder) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+
+    res.status(200).json(deletedOrder);
+  } catch (error) {
+    console.error('Error deleting order:', error);
+    res.status(500).json({ error: 'Failed to delete the order' });
+  }
+};
+
 // Export the order controller
 module.exports = {
   placeOrder,
@@ -113,4 +145,6 @@ module.exports = {
   getOrderHistory,
   updateOrderStatus,
   processOrder,
+  getAllOrders,
+  deleteOrder,
 };

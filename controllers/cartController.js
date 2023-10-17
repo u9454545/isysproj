@@ -97,9 +97,20 @@ const removeFromCart = (req, res) => {
     })
     .catch((err) => res.status(500).json({ error: err.message }));
 };
+const getCart = (req, res) => {
+  Cart.findOne({ user: req.user._id }) // Assuming you have user authentication and req.user contains the user's ID
+    .then((cart) => {
+      if (!cart) {
+        return res.status(404).json({ message: 'Cart not found' });
+      }
+      res.status(200).json(cart);
+    })
+    .catch((err) => res.status(500).json({ error: err.message }));
+};
 
 // Export the cart controller
 module.exports = {
+  getCart,
   addToCart,
   updateCart,
   removeFromCart,

@@ -1,9 +1,18 @@
 // Import necessary modules and models
 const User = require('../models/userModel'); // Import your User model
 const bcrypt = require('bcrypt'); // Import bcrypt for password hashing
-const jwt = require('jsonwebtoken'); // Import jsonwebtoken for token generation
+const jwt = require('jsonwebtoken'); 
+const crypto = require('crypto');
+// Import jsonwebtoken for token generation
 
-// Controller functions for authentication and authorization
+
+
+function generateSecretKey() {
+    const secret = crypto.randomBytes(32).toString('base64url');
+    return secret;
+}
+
+console.log(generateSecretKey());
 
 // User authentication (login)
 const authenticateUser = async (req, res) => {
@@ -42,7 +51,7 @@ const authenticateUser = async (req, res) => {
 };
 
 // User authorization (role-based access control)
-const authorizeUser = (req, res, next) => {
+const authoriseUser = (req, res, next) => {
   try {
     // Check the user's role or permissions here
     // You can use information from the JWT token or the user object stored in the request to determine authorization
@@ -77,9 +86,48 @@ const authorizeUser = (req, res, next) => {
     return res.status(500).json({ message: 'Internal server error' });
   }
 };
+const registerUser = async (req, res) => {
+  try {
+    // Extract user registration data from the request body
+    const { username, password } = req.body;
+
+    // Check if the username is already taken
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Username already taken. Please choose a different one.' });
+    }
+
+    // Hash the user's password before saving it to the database
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user in the database
+    const newUser = new User({ username, password: hashedPassword });
+    await newUser.save();
+
+    return res.status(201).json({ message: 'User registration successful' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+// User logout
+const logoutUser = (req, res) => {
+  try {
+    // Handle user logout logic, e.g., invalidate the token if using JWT
+    // You can also clear any session data if using session-based authentication
+
+    return res.status(200).json({ message: 'User logout successful' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
 
 // Export the auth controller
 module.exports = {
   authenticateUser,
-  authorizeUser,
+  authoriseUser,
+  registerUser,
+  logoutUser,
 };
