@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+</head>
+<body>
+
+<h1>Product List</h1>
+<ul id="productList"></ul>
+
+<h2>Add New Product</h2>
+<form id="addProductForm">
+    Name: <input type="text" id="productName"><br>
+    Description: <input type="text" id="productDescription"><br>
+    Price: <input type="number" id="productPrice"><br>
+    <input type="submit" value="Add Product">
+</form>
+
+<script>
+    const productListElem = document.getElementById('productList');
+    const productForm = document.getElementById('addProductForm');
+    const productNameElem = document.getElementById('productName');
+    const productDescriptionElem = document.getElementById('productDescription');
+    const productPriceElem = document.getElementById('productPrice');
+
+    // Fetch all products and display
+    async function fetchProducts() {
+        try {
+            const response = await fetch('/products');
+            const products = await response.json();
+
+            // Clear existing list
+            productListElem.innerHTML = '';
+
+            products.forEach(product => {
+                const li = document.createElement('li');
+                li.textContent = `${product.name} - ${product.description} - $${product.price}`;
+                
+                // For simplicity, we are not implementing the edit and delete buttons here
+                // You can add them similarly and attach event listeners for their functionality
+
+                productListElem.appendChild(li);
+            });
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    }
+
+    productForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        
+        const newProduct = {
+            name: productNameElem.value,
+            description: productDescriptionElem.value,
+            price: parseFloat(productPriceElem.value)
+        };
+
+        try {
+            const response = await fetch('/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newProduct),
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                // If product added successfully, refresh list
+                fetchProducts();
+            } else {
+                console.error('Error adding product:', result.message);
+            }
+        } catch (error) {
+            console.error('Error adding product:', error);
+        }
+    });
+
+    // Fetch products when the page loads
+    fetchProducts();
+</script>
+
+</body>
+</html>

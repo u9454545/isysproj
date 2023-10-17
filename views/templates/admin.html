@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional: Add your stylesheet if you have one -->
+</head>
+
+<body>
+
+<h1>Admin Dashboard</h1>
+
+<h2>Manage Products</h2>
+<form action="/admin/products?action=add" method="post">
+    <label for="productName">Product Name:</label>
+    <input type="text" id="productName" name="productName" required>
+    <!-- Add other product fields as necessary -->
+    <button type="submit">Add Product</button>
+</form>
+
+<form action="/admin/products?action=update" method="put">
+    <label for="productId">Product ID:</label>
+    <input type="text" id="productId" name="productId" required>
+    <label for="newProductName">New Product Name:</label>
+    <input type="text" id="newProductName" name="newProductName">
+    <!-- Add other product fields as necessary -->
+    <button type="submit">Update Product</button>
+</form>
+
+<form action="/admin/products?action=delete" method="delete">
+    <label for="deleteProductId">Product ID:</label>
+    <input type="text" id="deleteProductId" name="deleteProductId" required>
+    <button type="submit">Delete Product</button>
+</form>
+
+<h2>Manage Orders</h2>
+<form action="/admin/orders?action=updateStatus" method="put">
+    <label for="orderId">Order ID:</label>
+    <input type="text" id="orderId" name="orderId" required>
+    <label for="newStatus">New Status:</label>
+    <input type="text" id="newStatus" name="newStatus" required>
+    <button type="submit">Update Order Status</button>
+</form>
+
+<h2>Manage User Accounts</h2>
+<form action="/admin/users?action=suspend" method="put">
+    <label for="userId">User ID:</label>
+    <input type="text" id="userId" name="userId" required>
+    <label for="isSuspended">Suspend:</label>
+    <select id="isSuspended" name="isSuspended">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </select>
+    <button type="submit">Update User Status</button>
+</form>
+
+<form action="/admin/users?action=delete" method="delete">
+    <label for="deleteUserId">User ID:</label>
+    <input type="text" id="deleteUserId" name="deleteUserId" required>
+    <button type="submit">Delete User Account</button>
+</form>
+
+</body>
+
+</html>
