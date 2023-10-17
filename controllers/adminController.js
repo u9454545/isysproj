@@ -4,6 +4,9 @@ const Order = require('./models/Order'); // Import the Order model
 const User = require('./models/User'); // Import the User model
 
 // Controller functions for managing admin tasks
+const getDashboard = (req, res) => {
+  res.sendFile('admin-dashboard.html', { root: './public' }); // Adjust the root folder as needed
+};
 
 // Manage products as an admin
 const manageProducts = async (req, res) => {
@@ -84,4 +87,5 @@ module.exports = {
   manageProducts,
   manageOrders,
   manageUserAccounts,
+  getDashboard,
 };
