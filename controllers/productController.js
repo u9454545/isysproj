@@ -1,7 +1,7 @@
 // Import necessary modules and dependencies
 const express = require('express');
 const router = express.Router();
-const Product = require('../models/Product'); // You should have a Product model defined
+const Product = require('../models/productModel'); // You should have a Product model defined
 
 // Route to get a list of all products
 router.get('/products', async (req, res) => {

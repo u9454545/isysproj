@@ -6,5 +6,6 @@ const adminController = require('../controllers/adminController');
 router.get('/admin/dashboard', adminController.getDashboard);
 router.get('/admin/products', adminController.getAllProducts);
 router.get('/admin/orders', adminController.getAllOrders);
+router.get('/admin/user-accounts', adminController.manageUserAccounts); 
 
 module.exports = router;

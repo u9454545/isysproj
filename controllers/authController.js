@@ -1,5 +1,5 @@
 // Import necessary modules and models
-const User = require('../models/User'); // Import your User model
+const User = require('../models/userModel'); // Import your User model
 const bcrypt = require('bcrypt'); // Import bcrypt for password hashing
 const jwt = require('jsonwebtoken'); // Import jsonwebtoken for token generation
 

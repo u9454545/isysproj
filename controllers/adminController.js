@@ -1,7 +1,7 @@
 // Import necessary modules and models
-const Product = require('./models/Product'); // Import the Product model
-const Order = require('./models/Order'); // Import the Order model
-const User = require('./models/User'); // Import the User model
+const Product = require('../models/productModel'); // Import the Product model
+const Order = require('../models/orderModel'); // Import the Order model
+const User = require('../models/userModel'); // Import the User model
 
 // Controller functions for managing admin tasks
 const getDashboard = (req, res) => {
