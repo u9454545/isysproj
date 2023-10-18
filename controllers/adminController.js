@@ -5,7 +5,7 @@ const User = require('../models/userModel'); // Import the User model
 
 // Controller functions for managing admin tasks
 const getDashboard = (req, res) => {
-  res.sendFile('admin-dashboard.html', { root: './public' }); // Adjust the root folder as needed
+  res.sendFile('admin.html', { root: './views/templates' }); // Adjust the root folder as needed
 };
 
 // Manage products as an admin

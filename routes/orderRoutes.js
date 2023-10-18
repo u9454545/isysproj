@@ -10,6 +10,6 @@ router.put('/orders/:id', orderController.updateOrderStatus);
 router.delete('/orders/:id', orderController.deleteOrder);
 router.get('/orders/:id', orderController.getOrderHistory);
 router.get('/orders/:id', orderController.processOrder);
-
+router.get('/htmlpage', orderController.getHtmlPage);
 module.exports = router;
 

@@ -1,5 +1,7 @@
 // Import necessary modules and models
 const Cart = require('../models/cartModel');
+const path = require('path');
+
 
 // Controller functions for managing the shopping cart
 
@@ -103,10 +105,16 @@ const getCart = (req, res) => {
       if (!cart) {
         return res.status(404).json({ message: 'Cart not found' });
       }
-      res.status(200).json(cart);
+
+      // Assuming your 'cart.html' file is located in a 'views' directory within your project
+      const filePath = path.join(__dirname, '../views/templates/cart.html');
+
+      // Use res.sendFile to send the 'cart.html' file as the response
+      res.sendFile(filePath);
     })
     .catch((err) => res.status(500).json({ error: err.message }));
 };
+
 
 // Export the cart controller
 module.exports = {

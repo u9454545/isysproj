@@ -137,6 +137,29 @@ const deleteOrder = async (req, res) => {
     res.status(500).json({ error: 'Failed to delete the order' });
   }
 };
+// Function to return an HTML page
+const getHtmlPage = (req, res) => {
+  try {
+    // You can define your HTML content here or read it from a file
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Sample HTML Page</title>
+      </head>
+      <body>
+        <h1>Welcome to the Sample HTML Page</h1>
+        <p>This is an example HTML page.</p>
+      </body>
+      </html>
+    `;
+
+    res.send(htmlContent);
+  } catch (error) {
+    console.error('Error sending HTML page:', error);
+    res.status(500).json({ error: 'Failed to send the HTML page' });
+  }
+};
 
 // Export the order controller
 module.exports = {
@@ -147,4 +170,5 @@ module.exports = {
   processOrder,
   getAllOrders,
   deleteOrder,
+  getHtmlPage,
 };
