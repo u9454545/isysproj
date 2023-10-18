@@ -106,6 +106,61 @@ const processOrder = async (req, res) => {
   }
 };
 
+// Get all orders
+const getAllOrders = async (req, res) => {
+  try {
+    // Find all orders
+    const orders = await Order.find();
+
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error('Error getting all orders:', error);
+    res.status(500).json({ error: 'Failed to get all orders' });
+  }
+};
+
+// Delete an order by ID
+const deleteOrder = async (req, res) => {
+  try {
+    const orderId = req.params.id;
+
+    // Find and delete the order by ID
+    const deletedOrder = await Order.findByIdAndDelete(orderId);
+
+    if (!deletedOrder) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+
+    res.status(200).json(deletedOrder);
+  } catch (error) {
+    console.error('Error deleting order:', error);
+    res.status(500).json({ error: 'Failed to delete the order' });
+  }
+};
+// Function to return an HTML page
+const getHtmlPage = (req, res) => {
+  try {
+    // You can define your HTML content here or read it from a file
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Sample HTML Page</title>
+      </head>
+      <body>
+        <h1>Welcome to the Sample HTML Page</h1>
+        <p>This is an example HTML page.</p>
+      </body>
+      </html>
+    `;
+
+    res.send(htmlContent);
+  } catch (error) {
+    console.error('Error sending HTML page:', error);
+    res.status(500).json({ error: 'Failed to send the HTML page' });
+  }
+};
+
 // Export the order controller
 module.exports = {
   placeOrder,
@@ -113,4 +168,7 @@ module.exports = {
   getOrderHistory,
   updateOrderStatus,
   processOrder,
+  getAllOrders,
+  deleteOrder,
+  getHtmlPage,
 };
