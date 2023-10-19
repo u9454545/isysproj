@@ -21,13 +21,13 @@
             <i><a class="blank"> text</a></i>
             <ul>
                 <li><a class="navColour" href="./index.html"><i class="fa-solid fa-mobile"></i> HOME</a></li>
-                <li><a class="navColour" href="signup.html">SHOP</a></li>
-                <li><a class="navColour" href="signup.html">SIGNUP/LOGIN</a></li>
+                <li><a class="navColour" href="loginSU.html">SHOP</a></li>
+                <li><a class="navColour" href="loginSU.html">SIGNUP/LOGIN</a></li>
             </ul>
         </header>
         <section class="banner">
             <div class="bookNow">
-                <button id="bookNowButton">SHOP NOW</button>
+                <button id="bookNowButton" onclick="navigateToLogin()">SHOP NOW</button>
             </div>
         </section>
 
@@ -38,9 +38,9 @@
             </div>
             <div class="about-new-content">
                 <p><strong>Who are we? </strong><br>
-                Emmanuel Mercado, emer2478, Frontend Responsibility<br>
-                Minuka Fernando, Pfer3757, backend. <br>
-                Aviral Singhal, asin2349, did get survey results, sign up/login page, 10.2 appendix, explaining the web prototype that was completed. <br>
+                Emmanuel Mercado, EMER2478, Frontend Responsibility<br>
+                Minuka Fernando, PFER3757, Backend. <br>
+                Utkarsh Vashisht, UVAS7225, did get survey results, sign up/login page, 10.2 appendix, explaining the web prototype that was completed. I'm just some extra text for no reason.<br>
                 </p><br>
                 <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
@@ -53,7 +53,7 @@
                 deserunt mollit anim</p>
             </div>
             <div class="more-button">
-                <button href="#" id="more">SHOP NOW</button>
+                <button id="more" onclick="navigateToShopMore()">SHOP NOW</button>
             </div>
             <div class="line-1"></div>
         </div>
@@ -98,7 +98,7 @@
                 </div>
             </div>
             <div class="more-button">
-                <button href="#" id="more">SHOP NOW</button>
+                <button id="more" onclick="navigateToShopMore()">SHOP NOW</button>
             </div>
             <div class="line-1"></div>
         </div>
@@ -138,7 +138,7 @@
                 </div>
             </div>
             <div class="more-button">
-                <button href="#" id="more">SHOP NOW</button>
+                <button id="more" onclick="navigateToShopMore()">SHOP NOW</button>
             </div>
             <div class="line-1"></div>
         </div>
@@ -152,7 +152,7 @@
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30222.621862488126!2d151.17491563564184!3d-33.898262971289576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12b1d4ab9ef1d9%3A0x1d017d69037a07c0!2sThe%20University%20of%20Sydney!5e0!3m2!1sen!2sau!4v1681485136004!5m2!1sen!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="more-button">
-                <button href="#" id="more">SHOP NOW</button>
+                <button id="more" onclick="navigateToShopMore()">SHOP NOW</button>
             </div>
             <div class="line-1"></div>
         </div>
@@ -204,7 +204,7 @@
                 </div>
             </div>
             <div class="more-button">
-                <button href="#" id="more">SHOP NOW</button>
+                <button id="more" onclick="navigateToShopMore()">SHOP NOW</button>
             </div>
             <div class="line-1"></div>
             
@@ -217,8 +217,8 @@
             <div class="col-1">
                 <h3>LINKS</h3>
                 <a href="#">Home</a>
-                <a href="#">Shop</a>
-                <a href="#">Signup/Login</a>
+                <a href="loginSU.html">Shop</a>
+                <a href="loginSU.html">Signup/Login</a>
             </div>
             <div class="col-2">
                 <h3>NEWSLETTER</h3>
@@ -253,6 +253,16 @@
                 var header = document.querySelector("header");
                 header.classList.toggle("sticky", window.scrollY > 0);
             })
+        </script>
+        <script>
+            function navigateToLogin() {
+                window.location.href = 'loginSU.html'; // Replace 'shopPage.html' with your desired URL
+            }
+        </script>
+        <script>
+            function navigateToShopMore() {
+                window.location.href = 'loginSU.html'; // Replace 'shopPage.html' with your desired URL
+            }
         </script>
     </body>
 </html>
