@@ -34,6 +34,7 @@ const registerUser = async (req, res) => {
 
 // Login user
 const loginUser = async (req, res) => {
+  console.log("reaching");
   try {
     const { email, password } = req.body;
 

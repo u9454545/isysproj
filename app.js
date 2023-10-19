@@ -4,7 +4,7 @@ const express = require('express');
 const db = require('./database'); // adjust path based on your folder structure
 const app = express();
 
-connectDB();
+//connectDB();
 
 const port = 3000;
 
@@ -13,7 +13,7 @@ const port = 3000;
 
 
 app.get('/', (req, res) => {
-  res.sendFile('admin.html', { root: './views/templates' });
+  res.sendFile('index.html', { root: './views/layouts' });
 });
 
 app.get('/cart', (req, res) => {
@@ -28,7 +28,7 @@ app.get('/products', (req, res) => {
 });
 
 app.get('/user', (req, res) => {
-  res.sendFile('user.html', { root: './views/templates' });
+  res.sendFile('user.html', { root: './views/layouts' });
 });
 
 const adminRoutes = require('./routes/adminRoutes');

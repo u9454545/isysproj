@@ -22,7 +22,7 @@
             <ul>
                 <li><a class="navColour" href="./index.html"><i class="fa-solid fa-mobile"></i> HOME</a></li>
                 <li><a class="navColour" href="loginSU.html">SHOP</a></li>
-                <li><a class="navColour" href="loginSU.html">SIGNUP/LOGIN</a></li>
+                <li><a class="navColour" href="user">SIGNUP/LOGIN</a></li>
             </ul>
         </header>
         <section class="banner">
@@ -249,6 +249,8 @@
 
         <!-- javascript --> 
         <script type="text/javascript">
+            app.use(express.static('public'));
+
             window.addEventListener("scroll", function(){
                 var header = document.querySelector("header");
                 header.classList.toggle("sticky", window.scrollY > 0);
@@ -256,12 +258,12 @@
         </script>
         <script>
             function navigateToLogin() {
-                window.location.href = 'loginSU.html'; // Replace 'shopPage.html' with your desired URL
+                window.location.href = 'loginSU.html'; 
             }
         </script>
         <script>
             function navigateToShopMore() {
-                window.location.href = 'loginSU.html'; // Replace 'shopPage.html' with your desired URL
+                window.location.href = 'loginSU.html'; 
             }
         </script>
     </body>
