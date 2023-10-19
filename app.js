@@ -1,8 +1,16 @@
 // app.js
 
 const express = require('express');
+const db = require('./database'); // adjust path based on your folder structure
 const app = express();
+
+connectDB();
+
 const port = 3000;
+
+
+
+
 
 app.get('/', (req, res) => {
   res.sendFile('admin.html', { root: './views/templates' });
