@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs'); // Import bcrypt for password hashing
 
 // Register a new user
 const registerUser = async (req, res) => {
+  console.log("I AM HERE");
   try {
     const { name, email, password } = req.body;
 
