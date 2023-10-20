@@ -1,0 +1,45 @@
+[
+    {
+        "id": 1,
+        "name": "ULTIMATE BEAST SHIRT",
+        "price": 100,
+        "image": "resources/activities/5.png",
+        "type": "shirt"
+    },
+    {
+        "id": 2,
+        "name": "WINGAURDIAN LEVIOSAS",
+        "price": 200,
+        "image": "resources/activities/4.png",
+        "type": "shoes"
+    },
+    {
+        "id": 3,
+        "name": "MONEY MAYWEATHER SHORTS",
+        "price": 150,
+        "image": "resources/activities/6.png",
+        "type": "shorts"
+    },
+    {
+        "id": 4,
+        "name": "PRINCESS FREAKY KICKS",
+        "price": 200,
+        "image": "resources/activities/7.png",
+        "type": "shoes"
+    },
+    {
+        "id": 5,
+        "name": "RIPOFF GUCCI SHORTS",
+        "price": 150,
+        "image": "resources/activities/8.png",
+        "type": "shorts"
+    },
+    {
+        "id": 6,
+        "name": "OVERPRICED SHIRT",
+        "price": 100,
+        "image": "resources/activities/9.png",
+        "type": "shirt"
+    }
+    
+]

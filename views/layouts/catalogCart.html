@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="catalogCart.css">
+        <script src="https://kit.fontawesome.com/35fc737223.js" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Goldman&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+        <title>CatCart</title>
+    </head>
+    <body>
+        <!-- header --> 
+        <header>
+            <i class="fa-solid fa-shoe-prints"></i>
+            <i><a class="blank"> text</a></i>
+            <ul>
+                <li><a class="navColour" href="#">ORDER HISTORY</a></li>
+                <li><a class="navColour" href="./index.html">LOGOUT</a></li>
+                <i class="fa-solid fa-user"></i>
+            </ul>
+        </header>
+        <section class="banner">
+            <div class="bookNow">
+                <button id="bookNowButton" onclick="navigateToLogin()">SHOP NOW</button>
+            </div>
+        </section>
+
+        <!-- popular products container (add filter)-->
+        <div class="container">
+            <div class="secondHead">
+                <h1>POPULAR ITEMS</h1>
+                <select id="productFilter">
+                    <option value="all">All</option>
+                    <option value="shirt">Shirts</option>
+                    <option value="shoes">Shoes</option>
+                    <option value="shorts">Shorts</option>
+                </select>
+                
+                <div class="iconCart">
+                    <img src="resources/shoppingCart.png" alt="">
+                    <div class="totalQuantity">0</div>
+                </div>
+            </div>
+
+            <div class="listProduct">
+                <div class="item">
+                    <img src="resources/activities/5.png">
+                    <h2>ULTIMATE BEAST SHIRT</h2>
+                    <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna.</a>
+                    <div class="price">$100</div>
+                    <button>Add To Cart</button>
+                </div>
+                <div class="item">
+                    <img src="resources/activities/4.png">
+                    <h2>WINGAURDIAN LEVIOSAS</h2>
+                    <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna.</a>
+                    <div class="price">$200</div>
+                    <button>Add To Cart</button>
+                </div>
+                <div class="item">
+                    <img src="resources/activities/6.png">
+                    <h2>MONEY MAYWEATHER SHORTS</h2>
+                    <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna.</a>
+                    <div class="price">$150</div>
+                    <button>Add To Cart</button>
+                </div>
+            </div>
+            <div class="line-1"></div>
+        </div>
+
+        <!-- other products -->
+
+        <div class="otherContainer">
+            <div class="line-1"></div>
+        </div>
+
+
+        <!-- cart section-->
+        <div class="cart">
+            <h2>YOUR FREAK CART</h2>
+            <div class="listCart">
+                <div class="item">
+                    <img src="resources/activities/5.png">
+                    <div class="content">
+                        <div class="name">Product Name</div>
+                        <div class="price">$50/1 product</div>
+                    </div>
+                    <div class="quantity">
+                        <button>- </button>
+                        <span class="value">3</span>
+                        <button>+ </button>
+                    </div>
+                </div>
+            </div>
+            <div class="totalPrice">Total: $<span id="totalPriceValue">0</span></div>
+            <div class="buttons">
+                <div class="close">CLOSE</div>
+                <div class="checkout">
+                    <a href="checkout.html">CHECKOUT</a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- footer --> 
+        <div class="footer">
+            <div class="col-1">
+                <h3>LINKS</h3>
+                <a href="#">Home</a>
+                <a href="user.html">Shop</a>
+                <a href="user.html">Signup/Login</a>
+            </div>
+            <div class="col-2">
+                <h3>NEWSLETTER</h3>
+                <form>
+                    <input type="email" placeholder="Enter Email Address" required>
+                    <br>
+                    <button type="submit">SUBSCRIBE NOW</button>
+                </form>
+            </div>
+            <div class="col-3">
+                <h3>SOCIAL</h3>
+                <div class="social-icons">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-reddit"></i>
+                    <br>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-snapchat"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                    <i class="fa-brands fa-twitch"></i>
+                    <br>
+                    <i class="fa-brands fa-spotify"></i>
+                    <i class="fa-brands fa-bitcoin"></i>
+                    <i class="fa-brands fa-tiktok"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- javascript --> 
+        <script type="text/javascript">
+            window.addEventListener("scroll", function(){
+                var header = document.querySelector("header");
+                header.classList.toggle("sticky", window.scrollY > 0);
+            })
+        </script>
+        <script>
+            let scrollAmount = 0;
+            const step = 20; 
+            const screenHt = window.innerHeight - 70;
+
+            function scrollDown() {
+                window.scrollBy(0, step);
+                scrollAmount += step;
+                if(scrollAmount < screenHt){
+                    requestAnimationFrame(scrollDown);
+                }
+            }
+
+            function navigateToLogin() {
+                scrollAmount = 0; 
+                scrollDown();
+            }
+        </script>
+        <script src="catalogCart.js"></script>
+        <script>
+            document.getElementById('productFilter').addEventListener('change', addDataToHTML);
+            function addDataToHTML(){
+                let listProductHTML = document.querySelector('.listProduct');
+                listProductHTML.innerHTML = '';
+                let selectedType = document.getElementById('productFilter').value;
+
+                if(products != null) 
+                {
+                    products.forEach(product => {
+                        if(product.type === selectedType || selectedType === 'all') {
+                            let newProduct = document.createElement('div');
+                            newProduct.classList.add('item');
+                            newProduct.innerHTML = 
+                            `<img src="${product.image}" alt="">
+                            <h2>${product.name}</h2>
+                            <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                            sed do eiusmod tempor incididunt ut labore et dolore magna.</a>
+                            <div class="price">$${product.price}</div>
+                            <button onclick="addCart(${product.id})">Add To Cart</button>`;
+
+                            listProductHTML.appendChild(newProduct);
+                        }
+                    });
+                }
+            }
+        </script>
+    </body>
+</html>

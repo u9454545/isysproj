@@ -1,21 +1,23 @@
 // app.js
 
 const express = require('express');
-const connectDB = require('./database');
+//const db = require('./database'); // adjust path based on your folder structure
 const app = express();
+const mongoose = require('mongoose');
 
 
 
-connectDB();
+
+//db.connectDB();
 
 const port = 3000;
 
-
-
+app.use(express.json());
+app.use(express.static('./views/layouts'));
 
 
 app.get('/', (req, res) => {
-  res.sendFile('admin.html', { root: './views/templates' });
+  res.sendFile('index.html', { root: './views/layouts' });
 });
 
 app.get('/cart', (req, res) => {
@@ -30,7 +32,7 @@ app.get('/products', (req, res) => {
 });
 
 app.get('/user', (req, res) => {
-  res.sendFile('user.html', { root: './views/templates' });
+  res.sendFile('user.html', { root: './views/layouts' });
 });
 
 const adminRoutes = require('./routes/adminRoutes');
@@ -48,7 +50,24 @@ app.use('/orders', orderRoutes);
 app.use('/products', productRoutes);
 app.use('/users', userRoutes);
 
+const dotenv = require('dotenv');
+dotenv.config({path: './config.env'});
+//const mongoose = require('mongoose');
+//const app = require('./app');
 
+
+console.log(process.env);
+
+
+
+mongoose.connect(process.env.CONN_STR, {
+    useNewUrlParser: true
+}).then((conn) => {
+    //console.log(conn);
+    console.log('DB Connection Successful');
+}).catch((error) => {
+    console.log('Some error has occured');
+});
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });

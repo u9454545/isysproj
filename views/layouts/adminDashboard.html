@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="adminDash.css">
+
+</head>
+<body>
+
+<h1>Admin Dashboard</h1>
+
+<!-- Manage Products -->
+<h2>Manage Products</h2>
+
+<form id="productForm">
+    Product ID (for update & delete): <input type="text" id="productId"><br>
+    Product Name: <input type="text" id="productName"><br>
+    Price: <input type="number" id="productPrice"><br>
+    <button type="button" onclick="addProduct()">Add Product</button>
+    <button type="button" onclick="updateProduct()">Update Product</button>
+    <button type="button" onclick="deleteProduct()">Delete Product</button>
+</form>
+
+<!-- Manage Orders -->
+<h2>Manage Orders</h2>
+
+<form id="orderForm">
+    Order ID: <input type="text" id="orderId"><br>
+    New Status: <input type="text" id="orderStatus"><br>
+    <button type="button" onclick="updateOrderStatus()">Update Order Status</button>
+</form>
+
+<!-- Manage User Accounts -->
+<h2>Manage User Accounts</h2>
+
+<form id="userForm">
+    User ID: <input type="text" id="userId"><br>
+    Suspend Account: <input type="checkbox" id="isSuspended"><br>
+    <button type="button" onclick="suspendUser()">Suspend/Unsuspend User</button>
+    <button type="button" onclick="deleteUser()">Delete User</button>
+</form>
+
+<script>
+async function addProduct() {
+    const name = document.getElementById('productName').value;
+    const price = parseFloat(document.getElementById('productPrice').value);
+    await fetch('/admin/products?action=add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, price })
+    });
+}
+
+async function updateProduct() {
+    const productId = document.getElementById('productId').value;
+    const name = document.getElementById('productName').value;
+    const price = parseFloat(document.getElementById('productPrice').value);
+    await fetch(`/admin/products/${productId}?action=update`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, price })
+    });
+}
+
+async function deleteProduct() {
+    const productId = document.getElementById('productId').value;
+    await fetch(`/admin/products/${productId}?action=delete`, {
+        method: 'DELETE'
+    });
+}
+
+async function updateOrderStatus() {
+    const orderId = document.getElementById('orderId').value;
+    const newStatus = document.getElementById('orderStatus').value;
+    await fetch(`/admin/orders/${orderId}?action=updateStatus`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ newStatus })
+    });
+}
+
+async function suspendUser() {
+    const userId = document.getElementById('userId').value;
+    const isSuspended = document.getElementById('isSuspended').checked;
+    await fetch(`/admin/users/${userId}?action=suspend`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isSuspended })
+    });
+}
+
+async function deleteUser() {
+    const userId = document.getElementById('userId').value;
+    await fetch(`/admin/users/${userId}?action=delete`, {
+        method: 'DELETE'
+    });
+}
+</script>
+</body>
+</html>

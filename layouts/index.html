@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/35fc737223.js" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Goldman&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+        <title>ISYS2160</title>
+    </head>
+    <body>
+        <!-- header --> 
+        <header>
+            <i class="fa-solid fa-shoe-prints"></i>
+            <i><a class="blank"> text</a></i>
+            <ul>
+                <li><a class="navColour" href="./index.html"><i class="fa-solid fa-mobile"></i> HOME</a></li>
+                <li><a class="navColour" href="user.html">SHOP</a></li>
+                <li><a class="navColour" href="user.html">SIGNUP/LOGIN</a></li>
+            </ul>
+        </header>
+        <section class="banner">
+            <div class="bookNow">
+                <button id="bookNowButton" onclick="navigateToLogin()">SHOP NOW</button>
+            </div>
+        </section>
+
+        <!-- better about -->
+        <div class="new-about">
+            <div class="new-about-image">
+                <img src="resources/About.png">
+            </div>
+            <div class="about-new-content">
+                <p><strong>Who are we? </strong><br>
+                Emmanuel Mercado, EMER2478, Frontend Responsibility<br>
+                Minuka Fernando, PFER3757, Backend . <br>
+                Utkarsh Vashisht, UVAS7225, did get survey results, sign up/login page, 10.2 appendix, explaining the web prototype that was completed. I'm just some extra text for no reason.<br>
+                </p><br>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+                ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit 
+                esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
+                occaecat cupidatat non proident, sunt in culpa qui officia 
+                deserunt mollit anim</p>
+            </div>
+            <div class="more-button">
+                <button id="more" onclick="navigateToShopMore()">SHOP NOW</button>
+            </div>
+            <div class="line-1"></div>
+        </div>
+
+        <!-- better features -->
+        <div class="new-features">
+            <div class="new-features-image">
+                <img src="resources/features.png">
+            </div>
+            <div class="features-list">
+                <div>
+                    <h2>Durability</h2>
+                    <p>Our stuff's durable. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                    <h2>Timelessness</h2>
+                    <p>Last heaps of time. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+                <div>
+                    <h2>Performance</h2>
+                    <p>Feel better. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    <i class="fa-solid fa-person-running"></i>
+                </div>
+                <div>
+                    <h2>Chick Magnet</h2>
+                    <p>Look Attractive. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    <i class="fa-solid fa-magnet"></i>
+                </div>
+            </div>
+            <div class="more-button">
+                <button id="more" onclick="navigateToShopMore()">SHOP NOW</button>
+            </div>
+            <div class="line-1"></div>
+        </div>
+
+         <!-- better products -->
+         <div class="new-products">
+            <div class="new-products-image">
+                <img src="resources/Products.png">
+            </div>
+            <div class="products-list">
+                <div class="products">
+                    <img src="resources/activities/5.png">
+                    <div class="layer">
+                        <h2>SHIRTS</h2>
+                        <p>We sell shirts. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                            sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua.</p>
+                    </div>
+                </div>
+                <div class="products">
+                    <img src="resources/activities/4.png">
+                    <div class="layer">
+                        <h2>SHOES</h2>
+                        <p>We got them dogs. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                            sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua.</p>
+                    </div>
+                </div>
+                <div class="products">
+                    <img src="resources/activities/6.png">
+                    <div class="layer">
+                        <h2>SHORTS</h2>
+                        <p>We have shorts aswell. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                            sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="more-button">
+                <button id="more" onclick="navigateToShopMore()">SHOP NOW</button>
+            </div>
+            <div class="line-1"></div>
+        </div>
+
+        <!-- location -->
+        <div class="location">
+            <div class="location-image">
+                <img src="resources/Location.png">
+            </div>
+            <div class="location-search">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30222.621862488126!2d151.17491563564184!3d-33.898262971289576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12b1d4ab9ef1d9%3A0x1d017d69037a07c0!2sThe%20University%20of%20Sydney!5e0!3m2!1sen!2sau!4v1681485136004!5m2!1sen!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="more-button">
+                <button id="more" onclick="navigateToShopMore()">SHOP NOW</button>
+            </div>
+            <div class="line-1"></div>
+        </div>
+
+        <!-- reviews -->
+        <div class="reviews">
+            <div class="reviews-image">
+                <img src="resources/reviews.png">
+            </div>
+            <div class="review-section">
+                <div class="review">
+                    <img src="resources/people/jaden.png" alt="Profile picture">
+                    <h3>Jaden Schmidt</h3>
+                    <p class="review-text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna"</p>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                </div>
+                <div class="review">
+                    <img src="resources/people/gia.png" alt="Profile picture">
+                    <h3>The Greek Beak</h3>
+                    <p class="review-text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna"</p>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+                <div class="review">
+                    <img src="resources/people/tay.png" alt="Profile picture">
+                    <h3>Trailer Park</h3>
+                    <p class="review-text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna"</p>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="more-button">
+                <button id="more" onclick="navigateToShopMore()">SHOP NOW</button>
+            </div>
+            <div class="line-1"></div>
+            
+        </div>
+
+
+
+        <!-- footer --> 
+        <div class="footer">
+            <div class="col-1">
+                <h3>LINKS</h3>
+                <a href="#">Home</a>
+                <a href="user.html">Shop</a>
+                <a href="user.html">Signup/Login</a>
+            </div>
+            <div class="col-2">
+                <h3>NEWSLETTER</h3>
+                <form>
+                    <input type="email" placeholder="Enter Email Address" required>
+                    <br>
+                    <button type="submit">SUBSCRIBE NOW</button>
+                </form>
+            </div>
+            <div class="col-3">
+                <h3>SOCIAL</h3>
+                <div class="social-icons">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-reddit"></i>
+                    <br>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-snapchat"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                    <i class="fa-brands fa-twitch"></i>
+                    <br>
+                    <i class="fa-brands fa-spotify"></i>
+                    <i class="fa-brands fa-bitcoin"></i>
+                    <i class="fa-brands fa-tiktok"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- javascript --> 
+        <script type="text/javascript">
+            window.addEventListener("scroll", function(){
+                var header = document.querySelector("header");
+                header.classList.toggle("sticky", window.scrollY > 0);
+            })
+
+            app.use(express.static('public'));
+        </script>
+        <script>
+            function navigateToLogin() {
+                window.location.href = 'user.html'; 
+            }
+        </script>
+        <script>
+            function navigateToShopMore() {
+                window.location.href = 'user.html'; 
+            }
+        </script>
+    </body>
+</html>
