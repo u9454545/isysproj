@@ -1,0 +1,235 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+body{
+    background: #B4E24C;
+    min-height: 100vh;
+}
+
+/* header */
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.6s;
+    padding: 40px 100px;
+    z-index: 100000;
+}
+header .fa-solid{
+    position: relative;
+    left: -50px;
+    font-weight: 700;
+    color: black;
+    text-decoration: none;
+    font-size: 2em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.6s;
+}
+header .blank{
+    position: relative;
+    font-weight: 700;
+    color: transparent;
+    text-decoration: none;
+    font-size: 2em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0s;
+}
+header.sticky{
+    padding: 5px 100px;
+    background: black;
+}
+header .logo{
+    position: relative;
+    font-weight: 700;
+    color: black;
+    text-decoration: none;
+    font-size: 2em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.6s;
+}
+header ul{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header ul li{
+    position: relative;
+    list-style: none;
+}
+header ul li a{
+    position: relative;
+    margin: 0 15px;
+    text-decoration: none;
+    color: black;
+    letter-spacing: 2px;
+    font-weight: 500px;
+    transition: 00.6s;
+}
+/* banner */
+.banner{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url(resources/3.png);
+    background-size: cover;
+}
+.bookNow{
+    width: 100%;
+    position: absolute;
+    top: 95%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+#bookNowButton{
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid black;
+    background-color: transparent;
+    color: black;
+    cursor: pointer;
+    font-size: 1em;
+    position: relative;
+    overflow: hidden;
+    transition: 0.5s;
+}
+#bookNowButton:hover{
+    border: 3px solid white;
+    color: white;
+    font-size: 1.1em;
+}
+
+/* navbar function*/
+.search{
+    height: 30px;
+    border: 1px solid rgb(208, 208, 208);
+    border-radius: 3rem;
+    width: 35%;
+    margin-left: -220px;
+    padding-left: 21px;
+}
+.navColour:hover{
+    color: white;
+    font-size: 18px;
+}
+.navColourMain{
+    color: white;
+}
+
+header.sticky .logo,
+header.sticky .fa-solid,
+header.sticky ul li a{
+    color: #B4E24C; 
+}
+
+.fa-solid.fa-mobile {
+    font-size: 20px; 
+    margin-top: -10px;
+    margin-right: -40px; 
+}
+
+
+/* signup signin */
+.container{
+    width: 100%;
+    height: 100vh;
+}
+.form-box{
+    width: 90%;
+    max-width: 450px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    backdrop-filter: blur(10px);
+    padding: 50px 60px 70px;
+    text-align: center;
+    border-radius: 15px;
+}
+.form-box h1{
+    font-size: 30px;
+    margin-bottom: 60px;
+    color: black;
+    position: relative;
+}
+
+input{
+    width: 100%;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    padding: 18px 15px;
+}
+.input-field{
+    background-color: rgb(206, 255, 216);
+    margin: 15px 0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    max-height: 65px;
+    transition: max-height 0.5s;
+    overflow: hidden;
+}
+.input-field i{
+    margin-left: 15px;
+    color: #B4E24C;
+}
+.btn-field{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.btn-field button{
+    flex-basis: 45%;
+    background-color: black;
+    color: white;
+    height: 38px;
+    border-radius: 19px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: background 1s;
+    margin-top: 20px;
+}
+.input-group{
+    height: 240px
+}
+.btn-field button.off{
+    background-color: rgb(222, 255, 225);
+    color: #757575;
+}
+.line-1 {
+    height: 0.5px;
+    background: black;
+  }
+  #submitFormBtn {
+    width: 100%; /* Adjust width as needed */
+    padding: 10px 15px;
+    background-color: rgb(255, 116, 197); /* Background color */
+    color: #fff; /* Text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    margin-bottom: 20px;
+}
+
+#submitFormBtn:hover {
+    background-color: rgb(255, 133, 204); /* Slightly lighter on hover */
+}
