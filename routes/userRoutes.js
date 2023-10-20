@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
-
+console.log("userroutesReach");
 // Define routes related to users
 router.get('/users', userController.getAllUsers);
 router.get('/users/:id', userController.getUserById);

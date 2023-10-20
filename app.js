@@ -4,25 +4,13 @@ const express = require('express');
 const db = require('./database'); // adjust path based on your folder structure
 const app = express();
 const mongoose = require('mongoose');
-function connectDB() {
-  mongoose.connect('mongodb://localhost/your-database-name', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log('MongoDB connected successfully');
-  })
-  .catch((err) => {
-    console.error('MongoDB connection error:', err);
-  });
-}
 
-//connectDB();
+//db.connectDB();
 
 const port = 3000;
 
-
-
+app.use(express.json());
+app.use(express.static('./views/layouts'));
 
 
 app.get('/', (req, res) => {

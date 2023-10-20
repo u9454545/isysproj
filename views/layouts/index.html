@@ -21,8 +21,8 @@
             <i><a class="blank"> text</a></i>
             <ul>
                 <li><a class="navColour" href="./index.html"><i class="fa-solid fa-mobile"></i> HOME</a></li>
-                <li><a class="navColour" href="loginSU.html">SHOP</a></li>
-                <li><a class="navColour" href="user">SIGNUP/LOGIN</a></li>
+                <li><a class="navColour" href="user.html">SHOP</a></li>
+                <li><a class="navColour" href="user.html">SIGNUP/LOGIN</a></li>
             </ul>
         </header>
         <section class="banner">
@@ -217,8 +217,8 @@
             <div class="col-1">
                 <h3>LINKS</h3>
                 <a href="#">Home</a>
-                <a href="loginSU.html">Shop</a>
-                <a href="loginSU.html">Signup/Login</a>
+                <a href="user.html">Shop</a>
+                <a href="user.html">Signup/Login</a>
             </div>
             <div class="col-2">
                 <h3>NEWSLETTER</h3>
@@ -249,21 +249,21 @@
 
         <!-- javascript --> 
         <script type="text/javascript">
-            app.use(express.static('public'));
-
             window.addEventListener("scroll", function(){
                 var header = document.querySelector("header");
                 header.classList.toggle("sticky", window.scrollY > 0);
             })
+
+            app.use(express.static('public'));
         </script>
         <script>
             function navigateToLogin() {
-                window.location.href = 'loginSU.html'; 
+                window.location.href = 'user.html'; 
             }
         </script>
         <script>
             function navigateToShopMore() {
-                window.location.href = 'loginSU.html'; 
+                window.location.href = 'user.html'; 
             }
         </script>
     </body>
