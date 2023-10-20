@@ -103,8 +103,8 @@
                 console.log(formData.password);
                 console.log("4user reach");
 
-                fetch('/users/users/login', {
-                    method: 'POST',
+                fetch('/users/users/register', {
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -112,6 +112,7 @@
                 })
                 .then(response => response.json())
                 .then(data => {
+                    console.log('user.html here hello');
                     console.log(data);  
                     // Handle the response from the server (e.g., update UI, navigate to another page)
                 })
