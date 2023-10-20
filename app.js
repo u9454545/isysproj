@@ -1,9 +1,12 @@
 // app.js
 
 const express = require('express');
-const db = require('./database'); // adjust path based on your folder structure
+//const db = require('./database'); // adjust path based on your folder structure
 const app = express();
 const mongoose = require('mongoose');
+
+
+
 
 //db.connectDB();
 
@@ -47,7 +50,24 @@ app.use('/orders', orderRoutes);
 app.use('/products', productRoutes);
 app.use('/users', userRoutes);
 
+const dotenv = require('dotenv');
+dotenv.config({path: './config.env'});
+//const mongoose = require('mongoose');
+//const app = require('./app');
 
+
+console.log(process.env);
+
+
+
+mongoose.connect(process.env.CONN_STR, {
+    useNewUrlParser: true
+}).then((conn) => {
+    //console.log(conn);
+    console.log('DB Connection Successful');
+}).catch((error) => {
+    console.log('Some error has occured');
+});
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
