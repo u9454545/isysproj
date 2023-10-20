@@ -1,129 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Order Management</title>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="adminDash.css">
 
-    <link rel="stylesheet" href="views/layouts/adminDash.css">
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
-
 <body>
-    <h1>Order Management</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Customer Name</th>
-                <th>Items</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="orders-list">
-            <!-- The orders will be populated here using JavaScript -->
-        </tbody>
-    </table>
 
-    <script>
-        async function fetchAllOrders() {
-            try {
-                const response = await fetch('/getAllOrders');
-                const orders = await response.json();
+<h1>Admin Dashboard</h1>
 
-                const ordersList = document.getElementById('orders-list');
-                ordersList.innerHTML = ''; // Clear previous orders
+<!-- Manage Products -->
+<h2>Manage Products</h2>
 
-                orders.forEach(order => {
-                    const row = ordersList.insertRow();
-                    row.insertCell(0).textContent = order._id;
-                    row.insertCell(1).textContent = order.customerName;
-                    row.insertCell(2).textContent = order.items.join(', '); // Assuming items is an array
-                    row.insertCell(3).textContent = order.status;
+<form id="productForm">
+    Product ID (for update & delete): <input type="text" id="productId"><br>
+    Product Name: <input type="text" id="productName"><br>
+    Price: <input type="number" id="productPrice"><br>
+    <button type="button" onclick="addProduct()">Add Product</button>
+    <button type="button" onclick="updateProduct()">Update Product</button>
+    <button type="button" onclick="deleteProduct()">Delete Product</button>
+</form>
 
-                    const actionsCell = row.insertCell(4);
-                    if (order.status !== 'Processed') {
-                        const processButton = document.createElement('button');
-                        processButton.textContent = 'Process';
-                        processButton.onclick = () => processOrder(order._id);
-                        actionsCell.appendChild(processButton);
-                    }
+<!-- Manage Orders -->
+<h2>Manage Orders</h2>
 
-                    const statusSelect = document.createElement('select');
-                    ['Pending', 'Shipped', 'Processed'].forEach(status => {
-                        const option = document.createElement('option');
-                        option.value = status;
-                        option.textContent = status;
-                        if (order.status === status) {
-                            option.selected = true;
-                        }
-                        statusSelect.appendChild(option);
-                    });
-                    actionsCell.appendChild(statusSelect);
+<form id="orderForm">
+    Order ID: <input type="text" id="orderId"><br>
+    New Status: <input type="text" id="orderStatus"><br>
+    <button type="button" onclick="updateOrderStatus()">Update Order Status</button>
+</form>
 
-                    const updateButton = document.createElement('button');
-                    updateButton.textContent = 'Update Status';
-                    updateButton.onclick = () => updateOrderStatus(order._id, statusSelect.value);
-                    actionsCell.appendChild(updateButton);
-                });
-            } catch (error) {
-                console.error('Error fetching orders:', error);
-            }
-        }
+<!-- Manage User Accounts -->
+<h2>Manage User Accounts</h2>
 
-        async function processOrder(orderId) {
-            try {
-                const response = await fetch(`/processOrder/${orderId}`, {
-                    method: 'PUT',
-                });
-                if (response.ok) {
-                    fetchAllOrders(); // Refresh orders after processing
-                } else {
-                    console.error('Error processing order:', await response.text());
-                }
-            } catch (error) {
-                console.error('Error processing order:', error);
-            }
-        }
+<form id="userForm">
+    User ID: <input type="text" id="userId"><br>
+    Suspend Account: <input type="checkbox" id="isSuspended"><br>
+    <button type="button" onclick="suspendUser()">Suspend/Unsuspend User</button>
+    <button type="button" onclick="deleteUser()">Delete User</button>
+</form>
 
-        async function updateOrderStatus(orderId, status) {
-            try {
-                const response = await fetch(`/updateOrderStatus/${orderId}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ status }),
-                });
-                if (response.ok) {
-                    fetchAllOrders(); // Refresh orders after updating status
-                } else {
-                    console.error('Error updating order status:', await response.text());
-                }
-            } catch (error) {
-                console.error('Error updating order status:', error);
-            }
-        }
+<script>
+async function addProduct() {
+    const name = document.getElementById('productName').value;
+    const price = parseFloat(document.getElementById('productPrice').value);
+    await fetch('/admin/products?action=add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, price })
+    });
+}
 
-        // On page load, fetch all orders
-        window.onload = fetchAllOrders;
-    </script>
+async function updateProduct() {
+    const productId = document.getElementById('productId').value;
+    const name = document.getElementById('productName').value;
+    const price = parseFloat(document.getElementById('productPrice').value);
+    await fetch(`/admin/products/${productId}?action=update`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, price })
+    });
+}
+
+async function deleteProduct() {
+    const productId = document.getElementById('productId').value;
+    await fetch(`/admin/products/${productId}?action=delete`, {
+        method: 'DELETE'
+    });
+}
+
+async function updateOrderStatus() {
+    const orderId = document.getElementById('orderId').value;
+    const newStatus = document.getElementById('orderStatus').value;
+    await fetch(`/admin/orders/${orderId}?action=updateStatus`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ newStatus })
+    });
+}
+
+async function suspendUser() {
+    const userId = document.getElementById('userId').value;
+    const isSuspended = document.getElementById('isSuspended').checked;
+    await fetch(`/admin/users/${userId}?action=suspend`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isSuspended })
+    });
+}
+
+async function deleteUser() {
+    const userId = document.getElementById('userId').value;
+    await fetch(`/admin/users/${userId}?action=delete`, {
+        method: 'DELETE'
+    });
+}
+</script>
 </body>
-
 </html>

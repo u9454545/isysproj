@@ -31,13 +31,20 @@
             </div>
         </section>
 
-        <!-- popular products -->
+        <!-- popular products container (add filter)-->
         <div class="container">
             <div class="secondHead">
                 <h1>POPULAR ITEMS</h1>
+                <select id="productFilter">
+                    <option value="all">All</option>
+                    <option value="shirt">Shirts</option>
+                    <option value="shoes">Shoes</option>
+                    <option value="shorts">Shorts</option>
+                </select>
+                
                 <div class="iconCart">
                     <img src="resources/shoppingCart.png" alt="">
-                    <div class="amount">0</div>
+                    <div class="totalQuantity">0</div>
                 </div>
             </div>
 
@@ -70,10 +77,37 @@
             <div class="line-1"></div>
         </div>
 
+        <!-- other products -->
 
-        <!-- cart -->
+        <div class="otherContainer">
+            <div class="line-1"></div>
+        </div>
+
+
+        <!-- cart section-->
         <div class="cart">
-
+            <h2>YOUR FREAK CART</h2>
+            <div class="listCart">
+                <div class="item">
+                    <img src="resources/activities/5.png">
+                    <div class="content">
+                        <div class="name">Product Name</div>
+                        <div class="price">$50/1 product</div>
+                    </div>
+                    <div class="quantity">
+                        <button>- </button>
+                        <span class="value">3</span>
+                        <button>+ </button>
+                    </div>
+                </div>
+            </div>
+            <div class="totalPrice">Total: $<span id="totalPriceValue">0</span></div>
+            <div class="buttons">
+                <div class="close">CLOSE</div>
+                <div class="checkout">
+                    <a href="checkout.html">CHECKOUT</a>
+                </div>
+            </div>
         </div>
 
 
@@ -175,5 +209,32 @@
             }
         </script>
         <script src="catalogCart.js"></script>
+        <script>
+            document.getElementById('productFilter').addEventListener('change', addDataToHTML);
+            function addDataToHTML(){
+                let listProductHTML = document.querySelector('.listProduct');
+                listProductHTML.innerHTML = '';
+                let selectedType = document.getElementById('productFilter').value;
+
+                if(products != null) 
+                {
+                    products.forEach(product => {
+                        if(product.type === selectedType || selectedType === 'all') {
+                            let newProduct = document.createElement('div');
+                            newProduct.classList.add('item');
+                            newProduct.innerHTML = 
+                            `<img src="${product.image}" alt="">
+                            <h2>${product.name}</h2>
+                            <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                            sed do eiusmod tempor incididunt ut labore et dolore magna.</a>
+                            <div class="price">$${product.price}</div>
+                            <button onclick="addCart(${product.id})">Add To Cart</button>`;
+
+                            listProductHTML.appendChild(newProduct);
+                        }
+                    });
+                }
+            }
+        </script>
     </body>
 </html>
