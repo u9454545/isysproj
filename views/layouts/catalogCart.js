@@ -125,6 +125,6 @@ function changeQuantity($idProduct, $type){
         default:
             break;
     }
-    document.cookie = "listCart=" + JSON.stringify(listCart) + "; expires=Thu, 31 Dec 2026 23:59:59 UTC; path=/;";
+    document.cookie = "listCart=" + JSON.stringify(listCart) + "; expires=Thu, 31 Dec 2024 23:59:59 UTC; path=/;";
     addCartToHTML();
 }

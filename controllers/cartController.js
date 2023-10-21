@@ -7,11 +7,11 @@ const path = require('path');
 
 // Add a product to the shopping cart
 const addToCart = (req, res) => {
-  const productId = req.params.productId; // Assuming the product ID is passed in the request parameters
-  const quantity = parseInt(req.body.quantity); // Assuming the quantity is sent in the request body
+  const productId = req.params.productId; 
+  const quantity = parseInt(req.body.quantity); 
 
   // Check if the product exists in the cart
-  Cart.findOne({ user: req.user._id }) // Assuming you have user authentication and req.user contains the user's ID
+  Cart.findOne({ user: req.user._id }) 
     .then((cart) => {
       if (!cart) {
         // If the user doesn't have a cart yet, create a new cart
@@ -45,11 +45,11 @@ const addToCart = (req, res) => {
 
 // Update the shopping cart
 const updateCart = (req, res) => {
-  const productId = req.params.productId; // Assuming the product ID is passed in the request parameters
-  const quantity = parseInt(req.body.quantity); // Assuming the new quantity is sent in the request body
+  const productId = req.params.productId; 
+  const quantity = parseInt(req.body.quantity); 
 
   // Find the user's cart
-  Cart.findOne({ user: req.user._id }) // Assuming you have user authentication and req.user contains the user's ID
+  Cart.findOne({ user: req.user._id }) 
     .then((cart) => {
       if (!cart) {
         return res.status(404).json({ message: 'Cart not found' });
@@ -74,10 +74,10 @@ const updateCart = (req, res) => {
 
 // Remove a product from the shopping cart
 const removeFromCart = (req, res) => {
-  const productId = req.params.productId; // Assuming the product ID is passed in the request parameters
+  const productId = req.params.productId; 
 
   // Find the user's cart
-  Cart.findOne({ user: req.user._id }) // Assuming you have user authentication and req.user contains the user's ID
+  Cart.findOne({ user: req.user._id }) 
     .then((cart) => {
       if (!cart) {
         return res.status(404).json({ message: 'Cart not found' });
@@ -100,13 +100,13 @@ const removeFromCart = (req, res) => {
     .catch((err) => res.status(500).json({ error: err.message }));
 };
 const getCart = (req, res) => {
-  Cart.findOne({ user: req.user._id }) // Assuming you have user authentication and req.user contains the user's ID
+  Cart.findOne({ user: req.user._id }) 
     .then((cart) => {
       if (!cart) {
         return res.status(404).json({ message: 'Cart not found' });
       }
 
-      // Assuming your 'cart.html' file is located in a 'views' directory within your project
+     
       const filePath = path.join(__dirname, '../views/templates/cart.html');
 
       // Use res.sendFile to send the 'cart.html' file as the response
