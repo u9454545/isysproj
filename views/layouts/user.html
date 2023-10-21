@@ -87,24 +87,26 @@
             let nameInput = form.querySelector('input[type="text"]');
 
             form.addEventListener('submit', function(event) {
-                console.log("3user reach");
                 event.preventDefault();
 
                 let formData = {};
+                let url = ''; // To determine the endpoint URL
 
                 if (isSignupMode) {
                     formData.name = nameInput.value;
+                    formData.email = emailInput.value;
+                    formData.password = passwordInput.value;
+
+                    url = '/users/users/register'; // Signup endpoint
+                } else {
+                    formData.email = emailInput.value;
+                    formData.password = passwordInput.value;
+
+                    url = '/users/users/login'; // Login endpoint
                 }
 
-                formData.email = emailInput.value;
-                formData.password = passwordInput.value;
-
-                console.log(formData.email);
-                console.log(formData.password);
-                console.log("4user reach");
-
-                fetch('/users/users/register', {
-                    method: 'PUT',
+                fetch(url, {
+                    method: 'POST', 
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -112,9 +114,8 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('user.html here hello');
-                    console.log(data);  
-                    // Handle the response from the server (e.g., update UI, navigate to another page)
+                    console.log(data);
+                    // Handle the response from the server
                 })
                 .catch(error => {
                     console.error('There was an error sending the data', error);

@@ -9,94 +9,282 @@
 </head>
 <body>
 
-<h1>Admin Dashboard</h1>
+    <h1>Admin Dashboard</h1>
+    <div class="logoutButton">
+        <button onclick="logout()">Logout</button>
+    </div>
 
-<!-- Manage Products -->
-<h2>Manage Products</h2>
+    <!-- Manage Products -->
+    <h2>Manage Products</h2>
 
-<form id="productForm">
-    Product ID (for update & delete): <input type="text" id="productId"><br>
-    Product Name: <input type="text" id="productName"><br>
-    Price: <input type="number" id="productPrice"><br>
-    <button type="button" onclick="addProduct()">Add Product</button>
-    <button type="button" onclick="updateProduct()">Update Product</button>
-    <button type="button" onclick="deleteProduct()">Delete Product</button>
-</form>
+    <table id="productTable">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Stock Quantity</th>
+                <th>Image URL</th>
+                <th>Category</th>
+                <!-- do we need more? -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- dynamic adding stuff -->
+        </tbody>
+    </table>
 
-<!-- Manage Orders -->
-<h2>Manage Orders</h2>
+    <form id="productForm">
+        Product ID (for update & delete): <input type="text" id="productId"><br>
+        Product Name: <input type="text" id="productName"><br>
+        Price: <input type="number" id="productPrice"><br>
+        <button type="button" onclick="addProduct()">Add Product</button>
+        <button type="button" onclick="updateProduct()">Update Product</button>
+        <button type="button" onclick="deleteProduct()">Delete Product</button>
+    </form>
 
-<form id="orderForm">
-    Order ID: <input type="text" id="orderId"><br>
-    New Status: <input type="text" id="orderStatus"><br>
-    <button type="button" onclick="updateOrderStatus()">Update Order Status</button>
-</form>
+    <!-- Manage Orders -->
+    <h2>Manage Orders</h2>
 
-<!-- Manage User Accounts -->
-<h2>Manage User Accounts</h2>
+    <table id="orderTable">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User ID</th>
+                <th>Total Amount</th>
+                <th>Order Date</th>
+                <th>Status</th>
+                <!-- ... other columns? ... -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- dynamic add -->
+        </tbody>
+    </table>
 
-<form id="userForm">
-    User ID: <input type="text" id="userId"><br>
-    Suspend Account: <input type="checkbox" id="isSuspended"><br>
-    <button type="button" onclick="suspendUser()">Suspend/Unsuspend User</button>
-    <button type="button" onclick="deleteUser()">Delete User</button>
-</form>
+    <form id="orderForm">
+        Order ID: <input type="text" id="orderId"><br>
+        New Status: <input type="text" id="orderStatus"><br>
+        <button type="button" onclick="updateOrderStatus()">Update Order Status</button>
+    </form>
 
-<script>
-async function addProduct() {
-    const name = document.getElementById('productName').value;
-    const price = parseFloat(document.getElementById('productPrice').value);
-    await fetch('/admin/products?action=add', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, price })
-    });
-}
+    <!-- Manage User Accounts -->
+    <h2>Manage User Accounts</h2>
 
-async function updateProduct() {
-    const productId = document.getElementById('productId').value;
-    const name = document.getElementById('productName').value;
-    const price = parseFloat(document.getElementById('productPrice').value);
-    await fetch(`/admin/products/${productId}?action=update`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, price })
-    });
-}
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Account Created</th>
+                <th>Account Updated</th>
+                <!-- other cols? -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- dynamic add -->
+        </tbody>
+    </table>
 
-async function deleteProduct() {
-    const productId = document.getElementById('productId').value;
-    await fetch(`/admin/products/${productId}?action=delete`, {
-        method: 'DELETE'
-    });
-}
+    <form id="userForm">
+        User ID: <input type="text" id="userId"><br>
+        <button type="button" onclick="deleteUserFromServer()">Delete User</button>
+    </form>
 
-async function updateOrderStatus() {
-    const orderId = document.getElementById('orderId').value;
-    const newStatus = document.getElementById('orderStatus').value;
-    await fetch(`/admin/orders/${orderId}?action=updateStatus`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ newStatus })
-    });
-}
 
-async function suspendUser() {
-    const userId = document.getElementById('userId').value;
-    const isSuspended = document.getElementById('isSuspended').checked;
-    await fetch(`/admin/users/${userId}?action=suspend`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ isSuspended })
-    });
-}
 
-async function deleteUser() {
-    const userId = document.getElementById('userId').value;
-    await fetch(`/admin/users/${userId}?action=delete`, {
-        method: 'DELETE'
-    });
-}
-</script>
+
+    <script>
+    async function addProduct() {
+        const name = document.getElementById('productName').value;
+        const price = parseFloat(document.getElementById('productPrice').value);
+        await fetch('/admin/products?action=add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, price })
+        });
+    }
+
+    async function updateProduct() {
+        const productId = document.getElementById('productId').value;
+        const name = document.getElementById('productName').value;
+        const price = parseFloat(document.getElementById('productPrice').value);
+        await fetch(`/admin/products/${productId}?action=update`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, price })
+        });
+    }
+
+    async function deleteProduct() {
+        const productId = document.getElementById('productId').value;
+        await fetch(`/admin/products/${productId}?action=delete`, {
+            method: 'DELETE'
+        });
+    }
+
+    async function updateOrderStatus() {
+        const orderId = document.getElementById('orderId').value;
+        const newStatus = document.getElementById('orderStatus').value;
+        await fetch(`/admin/orders/${orderId}?action=updateStatus`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ newStatus })
+        });
+    }
+
+    async function deleteUser() {
+        const userId = document.getElementById('userId').value;
+        await fetch(`/admin/users/${userId}?action=delete`, {
+            method: 'DELETE'
+        });
+    }
+
+    function logout() {
+        window.location.href = 'index.html';
+    }
+    </script>
+    
+    <!-- other functions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/users/users')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(users => {
+                    const tbody = document.querySelector('#userTable tbody');
+
+                    users.forEach(user => {
+                        const tr = document.createElement('tr');
+
+                        const userIdTd = document.createElement('td');
+                        userIdTd.textContent = user._id;
+                        tr.appendChild(userIdTd);
+
+                        const nameTd = document.createElement('td');
+                        nameTd.textContent = user.name;
+                        tr.appendChild(nameTd);
+
+                        const emailTd = document.createElement('td');
+                        emailTd.textContent = user.email;
+                        tr.appendChild(emailTd);
+
+                        const roleTd = document.createElement('td');
+                        roleTd.textContent = user.role;
+                        tr.appendChild(roleTd);
+
+                        const createdAtTd = document.createElement('td');
+                        createdAtTd.textContent = new Date(user.createdAt).toLocaleString();
+                        tr.appendChild(createdAtTd);
+
+                        const updatedAtTd = document.createElement('td');
+                        updatedAtTd.textContent = new Date(user.updatedAt).toLocaleString();
+                        tr.appendChild(updatedAtTd);
+
+                        tbody.appendChild(tr);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching users:', error);
+                });
+        });
+
+        async function deleteUserFromServer() {
+            const userId = document.getElementById('userId').value;
+
+            if (!userId) {
+                alert('Please enter a User ID');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/users/users/${userId}`, {
+                    method: 'DELETE'
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert(data.message);
+                } else {
+                    alert(data.error);
+                }
+            } catch (error) {
+                console.error('Error deleting user:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchProductsAndPopulateTable();
+        });
+
+        function fetchProductsAndPopulateTable() {
+            fetch('/products/products') // The route to get all products
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(products => {
+                const tbody = document.querySelector('#productTable tbody');
+                
+                products.forEach(product => {
+                    const tr = document.createElement('tr');
+
+                    // Create and append product ID
+                    const productIdTd = document.createElement('td');
+                    productIdTd.textContent = product._id || ''; // Assuming the product has an _id field
+                    tr.appendChild(productIdTd);
+
+                    // Create and append product Name
+                    const productNameTd = document.createElement('td');
+                    productNameTd.textContent = product.name || '';
+                    tr.appendChild(productNameTd);
+
+                    // Create and append product Description
+                    const productDescriptionTd = document.createElement('td');
+                    productDescriptionTd.textContent = product.description || '';
+                    tr.appendChild(productDescriptionTd);
+
+                    // Create and append product Price
+                    const productPriceTd = document.createElement('td');
+                    productPriceTd.textContent = product.price || '';
+                    tr.appendChild(productPriceTd);
+
+                    // Create and append Stock Quantity
+                    const productStockTd = document.createElement('td');
+                    productStockTd.textContent = product.stockQuantity || ''; // Assuming there's a stockQuantity field in product
+                    tr.appendChild(productStockTd);
+
+                    // Create and append Image URL
+                    const productImageTd = document.createElement('td');
+                    productImageTd.textContent = product.imageUrl || ''; // Assuming there's an imageUrl field in product
+                    tr.appendChild(productImageTd);
+
+                    // Create and append Category
+                    const productCategoryTd = document.createElement('td');
+                    productCategoryTd.textContent = product.category || ''; // Assuming there's a category field in product
+                    tr.appendChild(productCategoryTd);
+
+                    // Append the entire row to the tbody
+                    tbody.appendChild(tr);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching products:', error);
+            });
+        }
+
+
+
+    </script>
 </body>
 </html>

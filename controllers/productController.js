@@ -5,6 +5,7 @@ const Product = require('../models/productModel'); // You should have a Product 
 
 // Route to get a list of all products
 const getAllProducts = async (req, res) => {
+  console.log('reaching get all products')
   try {
     const products = await Product.find(); // Fetch products from your database
     res.json(products);
