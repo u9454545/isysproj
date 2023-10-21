@@ -101,7 +101,7 @@
     async function addProduct() {
         const name = document.getElementById('productName').value;
         const price = parseFloat(document.getElementById('productPrice').value);
-        await fetch('/admin/products?action=add', {
+        await fetch('/products/products?action=add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, price })
@@ -112,7 +112,7 @@
         const productId = document.getElementById('productId').value;
         const name = document.getElementById('productName').value;
         const price = parseFloat(document.getElementById('productPrice').value);
-        await fetch(`/admin/products/${productId}?action=update`, {
+        await fetch(`/products/products/${productId}?action=update`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, price })
@@ -121,7 +121,7 @@
 
     async function deleteProduct() {
         const productId = document.getElementById('productId').value;
-        await fetch(`/admin/products/${productId}?action=delete`, {
+        await fetch(`/products/products/${productId}?action=delete`, {
             method: 'DELETE'
         });
     }
@@ -129,7 +129,7 @@
     async function updateOrderStatus() {
         const orderId = document.getElementById('orderId').value;
         const newStatus = document.getElementById('orderStatus').value;
-        await fetch(`/admin/orders/${orderId}?action=updateStatus`, {
+        await fetch(`/orders/orders/${orderId}?action=updateStatus`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ newStatus })
@@ -138,7 +138,7 @@
 
     async function deleteUser() {
         const userId = document.getElementById('userId').value;
-        await fetch(`/admin/users/${userId}?action=delete`, {
+        await fetch(`/admin/admin/users/${userId}?action=delete`, {
             method: 'DELETE'
         });
     }
