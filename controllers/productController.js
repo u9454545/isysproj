@@ -1,13 +1,13 @@
 // Import necessary modules and dependencies
 const express = require('express');
 const router = express.Router();
-const Product = require('../models/productModel'); // You should have a Product model defined
+const Product = require('../models/productModel');
 
 // Route to get a list of all products
 const getAllProducts = async (req, res) => {
   console.log('reaching get all products')
   try {
-    const products = await Product.find(); // Fetch products from your database
+    const products = await Product.find(); 
     res.json(products);
   } catch (err) {
     res.status(500).json({ message: 'Internal Server Error' });

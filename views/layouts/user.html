@@ -1,69 +1,140 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="loginSU.css">
-        <script src="https://kit.fontawesome.com/35fc737223.js" crossorigin="anonymous"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Goldman&display=swap" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-        <title>SIGNUP</title>
-    </head>
-    <body>
-        <!-- header --> 
-        <header>
-            <i class="fa-solid fa-shoe-prints"></i>
-            <i><a class="blank"> text</a></i>
-            <ul>
-                <li><a class="navColour" href="./index.html"><i class="fa-solid fa-mobile"></i> HOME</a></li>
-                <li><a class="navColour" href="user.html">SHOP</a></li>
-                <li><a class="navColour" href="user.html">SIGNUP/LOGIN</a></li>
-            </ul>
-        </header>
-        <section class="banner">
-
-            <div class="container">
-                <div class="form-box">
-                    <h1 id="title">SIGN UP</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="loginSU.css">
+    <script src="https://kit.fontawesome.com/35fc737223.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Goldman&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <title>SIGNUP</title>
+</head>
+<body>
+    <!-- header --> 
+    <header>
+        <i class="fa-solid fa-shoe-prints"></i>
+        <i><a class="blank"> text</a></i>
+        <ul>
+            <li><a class="navColour" href="./index.html"><i class="fa-solid fa-mobile"></i> HOME</a></li>
+            <li><a class="navColour" href="user.html">SHOP</a></li>
+            <li><a class="navColour" href="user.html">SIGNUP/LOGIN</a></li>
+        </ul>
+    </header>
+    <section class="banner">
+        <div class="container">
+            <div class="form-box">
+                <h1 id="title">SIGN UP</h1>
+                <div class="line-1"></div>
+                <form>
+                    <div class="input-group">
+                        <div class="input-field" id="nameField">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" placeholder="Name">
+                        </div>
+                        <div class="input-field">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" placeholder="Email">
+                        </div>
+                        <div class="input-field">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <button type="submit" id="submitFormBtn">SUBMIT</button>
                     <div class="line-1"></div>
-                    <form>
-                        <div class="input-group">
-                            <div class="input-field" id="nameField">
-                                <i class="fa-solid fa-user"></i>
-                                <input type="text" placeholder="Name">
-                            </div>
-
-                            <div class="input-field">
-                                <i class="fa-solid fa-envelope"></i>
-                                <input type="email" placeholder="Email">
-                            </div>
-
-                            <div class="input-field">
-                                <i class="fa-solid fa-lock"></i>
-                                <input type="password" placeholder="Password">
-                            </div>
-                        </div>
-                        <button type="submit" id="submitFormBtn">SUBMIT</button>
-                        <div class="line-1"></div>
-                        <div class="btn-field">
-                            <button type="button" id="signupBtn">SIGN UP</button>
-                            <button type="button" id="loginBtn"class="off">LOGIN</button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="btn-field">
+                        <button type="button" id="signupBtn">SIGN UP</button>
+                        <button type="button" id="loginBtn" class="off">LOGIN</button>
+                    </div>
+                </form>
             </div>
-            <div class="bookNow">
-                <button id="bookNowButton">SHOP NOW</button>
-            </div>
-        </section>
+        </div>
+        <div class="bookNow">
+            <button id="bookNowButton">SHOP NOW</button>
+        </div>
+    </section>
 
+    <!-- javascript --> 
+    <script type="text/javascript">
+        window.addEventListener("scroll", function(){
+            console.log("1user reach");
+            var header = document.querySelector("header");
+            header.classList.toggle("sticky", window.scrollY > 0);
+        });
+    </script>
+    <script>
+        console.log("2user reach");
+        let signupBtn = document.getElementById("signupBtn");
+        let loginBtn = document.getElementById("loginBtn");
+        let nameField = document.getElementById("nameField");
+        let title = document.getElementById("title");
+        let submitFormBtn = document.getElementById("submitFormBtn");
+
+        let isSignupMode = true;
+        let form = document.querySelector('.form-box form');
+        let emailInput = form.querySelector('input[type="email"]');
+        let passwordInput = form.querySelector('input[type="password"]');
+        let nameInput = form.querySelector('input[type="text"]');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let formData = {};
+
+            if (isSignupMode) {
+                formData.name = nameInput.value;
+            }
+
+            formData.email = emailInput.value;
+            formData.password = passwordInput.value;
+
+            const url = isSignupMode ? '/users/users/register' : '/users/users/login';
+            const method = isSignupMode ? 'PUT' : 'POST';
+
+            fetch(url, {
+                method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Handle the response from the server (e.g., update UI, navigate to another page)
+            })
+            .catch(error => {
+                console.error('There was an error sending the data', error);
+            });
+        });
+
+        loginBtn.onclick = function(){
+            nameField.style.maxHeight = "0";
+            title.innerHTML = "LOGIN";
+            submitFormBtn.textContent = "LOGIN";
+            signupBtn.classList.add("off");
+            loginBtn.classList.remove("off");
+            isSignupMode = false;
+        }
+        signupBtn.onclick = function(){
+            nameField.style.maxHeight = "60px";
+            title.innerHTML = "SIGN UP";
+            submitFormBtn.textContent = "SUBMIT";
+            loginBtn.classList.add("off");
+            signupBtn.classList.remove("off");
+            isSignupMode = true;
+        }
         
+        document.getElementById("bookNowButton").addEventListener("click", function() {
+            window.location.href = "catalogCart.html";
+        });
 
+<<<<<<< HEAD
 
         <!-- javascript --> 
         <script type="text/javascript">
@@ -145,3 +216,8 @@
         </script>
     </body>
 </html>
+=======
+    </script>
+</body>
+</html>
+>>>>>>> 7c430a67caac9b85beba86268f4d0403f6263394

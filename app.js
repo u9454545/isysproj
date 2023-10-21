@@ -1,7 +1,7 @@
 // app.js
 
 const express = require('express');
-//const db = require('./database'); // adjust path based on your folder structure
+//const db = require('./database'); 
 const app = express();
 const mongoose = require('mongoose');
 

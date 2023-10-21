@@ -1,4 +1,4 @@
-const User = require('../models/userModel'); // Import your User model
+const User = require('../models/userModel'); 
 const jwt = require('jsonwebtoken'); // Import JWT for authentication
 const bcrypt = require('bcryptjs'); // Import bcrypt for password hashing
 
@@ -25,7 +25,7 @@ const registerUser = async (req, res) => {
     const savedUser = await newUser.save();
     
     // Generate a JWT token for authentication
-    const token = jwt.sign({ userId: savedUser._id }, 'your-secret-key', { expiresIn: '1h' });
+    const token = jwt.sign({ userId: savedUser._id }, 'our-secret-key', { expiresIn: '1h' });
 
     res.status(201).json({ user: savedUser, token });
   } catch (error) {
@@ -55,7 +55,7 @@ const loginUser = async (req, res) => {
     }
  
     // Generate a JWT token for authentication
-    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, 'our-secret-key', { expiresIn: '1h' });
 
     res.status(200).json({ user, token });
   } catch (error) {

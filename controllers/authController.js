@@ -1,11 +1,17 @@
 // Import necessary modules and models
-const User = require('../models/userModel'); // Import your User model
+const User = require('../models/userModel'); // Import the User model
 const bcrypt = require('bcrypt'); // Import bcrypt for password hashing
-const jwt = require('jsonwebtoken'); 
+const jwt = require('jsonwebtoken'); // Import jsonwebtoken for token generation
 const crypto = require('crypto');
-// Import jsonwebtoken for token generation
 
 
+// Create an array to store blacklisted tokens
+const tokenBlacklist = [];
+
+// Function to add a token to the blacklist
+const addToBlacklist = (token) => {
+  tokenBlacklist.push(token);
+};
 
 function generateSecretKey() {
     const secret = crypto.randomBytes(32).toString('base64url');
@@ -16,7 +22,11 @@ console.log(generateSecretKey());
 
 // User authentication (login)
 const authenticateUser = async (req, res) => {
+  console.log("i am inside authentication")
+  console.log(req.body.password);
+  
   try {
+    console.log("before everything")
     // Extract user credentials from the request body
     const { username, password } = req.body;
 
@@ -27,7 +37,7 @@ const authenticateUser = async (req, res) => {
     if (!user) {
       return res.status(401).json({ message: 'Authentication failed. User not found.' });
     }
-
+    console.log("before checking")
     // Compare the provided password with the hashed password in the database
     const passwordMatch = await bcrypt.compare(password, user.password);
 
@@ -53,9 +63,8 @@ const authenticateUser = async (req, res) => {
 // User authorization (role-based access control)
 const authoriseUser = (req, res, next) => {
   try {
-    // Check the user's role or permissions here
-    // You can use information from the JWT token or the user object stored in the request to determine authorization
-
+    // Checking the user's role or permissions here
+    
     const token = req.header('Authorization');
 
     if (!token) {
@@ -69,8 +78,8 @@ const authoriseUser = (req, res, next) => {
 
       const { userId, username } = decodedToken;
 
-      // You can fetch user data from the database or use the decoded token information
-      // For simplicity, we assume the user has a role property in the decoded token
+      //using the decoded token information
+
       if (decodedToken.role === 'admin') {
         // Allow access to the protected resource
         req.user = { userId, username, role: 'admin' };
@@ -81,11 +90,12 @@ const authoriseUser = (req, res, next) => {
       }
     });
   } catch (error) {
-    // Handle any errors that occur during authorization
+    // Handle  errors that occur during authorization
     console.error(error);
     return res.status(500).json({ message: 'Internal server error' });
   }
 };
+
 const registerUser = async (req, res) => {
   try {
     // Extract user registration data from the request body
@@ -111,11 +121,22 @@ const registerUser = async (req, res) => {
   }
 };
 
-// User logout
 const logoutUser = (req, res) => {
   try {
-    // Handle user logout logic, e.g., invalidate the token if using JWT
-    // You can also clear any session data if using session-based authentication
+    // Extract the token from the request
+    const token = req.header('Authorization');
+
+    if (!token) {
+      return res.status(400).json({ message: 'Token not provided' });
+    }
+
+    // Check if the token is in the blacklist
+    if (tokenBlacklist.includes(token)) {
+      return res.status(401).json({ message: 'Token has already been invalidated' });
+    }
+
+    // Add the token to the blacklist
+    addToBlacklist(token);
 
     return res.status(200).json({ message: 'User logout successful' });
   } catch (error) {

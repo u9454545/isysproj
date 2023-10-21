@@ -47,7 +47,7 @@ const getOrderById = async (req, res) => {
 // Get order history for a user
 const getOrderHistory = async (req, res) => {
   try {
-    const userId = req.user.id; // Assuming you have user authentication
+    const userId = req.user.id; 
 
     // Find all orders for the user
     const orders = await Order.find({ customer: userId });
@@ -140,7 +140,7 @@ const deleteOrder = async (req, res) => {
 // Function to return an HTML page
 const getHtmlPage = (req, res) => {
   try {
-    // You can define your HTML content here or read it from a file
+    
     const htmlContent = `
       <!DOCTYPE html>
       <html>
