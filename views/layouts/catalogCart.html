@@ -20,7 +20,7 @@
             <i class="fa-solid fa-shoe-prints"></i>
             <i><a class="blank"> text</a></i>
             <ul>
-                <li><a class="navColour" href="#">ORDER HISTORY</a></li>
+                <li><a class="navColour" href="./orderHistory.html">ORDER HISTORY</a></li>
                 <li><a class="navColour" href="./index.html">LOGOUT</a></li>
                 <i class="fa-solid fa-user"></i>
             </ul>
@@ -31,29 +31,57 @@
             </div>
         </section>
 
-       <!-- popular products container (add filter)-->
-<div class="container">
-    <div class="secondHead">
-        <h1>POPULAR ITEMS</h1>
-        <select id="productFilter">
-            <option value="all">All</option>
-            <option value="shirt">Shirts</option>
-            <option value="shoes">Shoes</option>
-            <option value="shorts">Shorts</option>
-        </select>
-        
-        <div class="iconCart">
-            <img src="resources/shoppingCart.png" alt="">
-            <div class="totalQuantity">0</div>
+        <!-- popular products container (add filter)-->
+        <div class="container">
+            <div class="secondHead">
+                <h1>POPULAR ITEMS</h1>
+                <select id="productFilter">
+                    <option value="all">All</option>
+                    <option value="shirt">Shirts</option>
+                    <option value="shoes">Shoes</option>
+                    <option value="shorts">Shorts</option>
+                </select>
+                
+                <div class="iconCart">
+                    <img src="resources/shoppingCart.png" alt="">
+                    <div class="totalQuantity">0</div>
+                </div>
+            </div>
+
+            <div class="listProduct">
+                <div class="item">
+                    <img src="resources/activities/5.png">
+                    <h2>ULTIMATE BEAST SHIRT</h2>
+                    <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna.</a>
+                    <div class="price">$100</div>
+                    <button>Add To Cart</button>
+                </div>
+                <div class="item">
+                    <img src="resources/activities/4.png">
+                    <h2>WINGAURDIAN LEVIOSAS</h2>
+                    <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna.</a>
+                    <div class="price">$200</div>
+                    <button>Add To Cart</button>
+                </div>
+                <div class="item">
+                    <img src="resources/activities/6.png">
+                    <h2>MONEY MAYWEATHER SHORTS</h2>
+                    <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna.</a>
+                    <div class="price">$150</div>
+                    <button>Add To Cart</button>
+                </div>
+            </div>
+            <div class="line-1"></div>
         </div>
-    </div>
 
-    <div class="listProduct" id="productList">
-        <!-- Product items will be displayed here -->
-    </div>
-    <div class="line-1"></div>
-</div>
+        <!-- other products -->
 
+        <div class="otherContainer">
+            <div class="line-1"></div>
+        </div>
 
 
         <!-- cart section-->
