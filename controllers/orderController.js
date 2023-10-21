@@ -108,6 +108,7 @@ const processOrder = async (req, res) => {
 
 // Get all orders
 const getAllOrders = async (req, res) => {
+  console.log("reaching get all orders");
   try {
     // Find all orders
     const orders = await Order.find();

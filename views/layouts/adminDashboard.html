@@ -22,10 +22,8 @@
             <tr>
                 <th>Product ID</th>
                 <th>Name</th>
-                <th>Description</th>
+                <th>URL</th>
                 <th>Price</th>
-                <th>Stock Quantity</th>
-                <th>Image URL</th>
                 <th>Category</th>
                 <!-- do we need more? -->
             </tr>
@@ -39,6 +37,9 @@
         Product ID (for update & delete): <input type="text" id="productId"><br>
         Product Name: <input type="text" id="productName"><br>
         Price: <input type="number" id="productPrice"><br>
+        URL: <textarea id="productDescription"></textarea><br>
+        Category: <input type="text" id="productCategory"><br>
+
         <button type="button" onclick="addProduct()">Add Product</button>
         <button type="button" onclick="updateProduct()">Update Product</button>
         <button type="button" onclick="deleteProduct()">Delete Product</button>
@@ -99,41 +100,64 @@
 
     <script>
     async function addProduct() {
+        const productId = document.getElementById('productId').value;
         const name = document.getElementById('productName').value;
+        const description = document.getElementById('productDescription').value;
         const price = parseFloat(document.getElementById('productPrice').value);
+        const category = document.getElementById('productCategory').value;
+        const productData = {
+            productId,
+            name,
+            description,
+            price,
+            category
+        };
         await fetch('/products/products?action=add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, price })
+            body: JSON.stringify(productData)
         });
     }
+
 
     async function updateProduct() {
         const productId = document.getElementById('productId').value;
         const name = document.getElementById('productName').value;
         const price = parseFloat(document.getElementById('productPrice').value);
+        const description = document.getElementById('productDescription').value;
+        const category = document.getElementById('productCategory').value;
+
+        const productData = {
+            name,
+            description,
+            price,
+            category
+        };
+
         await fetch(`/products/products/${productId}?action=update`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, price })
+            body: JSON.stringify(productData)
         });
     }
 
     async function deleteProduct() {
         const productId = document.getElementById('productId').value;
-        await fetch(`/products/products/${productId}?action=delete`, {
+        await fetch(`/products/products/${productId}`, {  
             method: 'DELETE'
         });
     }
 
+
     async function updateOrderStatus() {
         const orderId = document.getElementById('orderId').value;
         const newStatus = document.getElementById('orderStatus').value;
-        await fetch(`/orders/orders/${orderId}?action=updateStatus`, {
+        await fetch(`/orders/orders/${orderId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ newStatus })
+            body: JSON.stringify({ status: newStatus })
         });
+
     }
 
     async function deleteUser() {
@@ -226,7 +250,7 @@
         });
 
         function fetchProductsAndPopulateTable() {
-            fetch('/products/products') // The route to get all products
+            fetch('/products/products')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -241,7 +265,7 @@
 
                     // Create and append product ID
                     const productIdTd = document.createElement('td');
-                    productIdTd.textContent = product._id || ''; // Assuming the product has an _id field
+                    productIdTd.textContent = product._id || ''; 
                     tr.appendChild(productIdTd);
 
                     // Create and append product Name
@@ -259,16 +283,6 @@
                     productPriceTd.textContent = product.price || '';
                     tr.appendChild(productPriceTd);
 
-                    // Create and append Stock Quantity
-                    const productStockTd = document.createElement('td');
-                    productStockTd.textContent = product.stockQuantity || ''; // Assuming there's a stockQuantity field in product
-                    tr.appendChild(productStockTd);
-
-                    // Create and append Image URL
-                    const productImageTd = document.createElement('td');
-                    productImageTd.textContent = product.imageUrl || ''; // Assuming there's an imageUrl field in product
-                    tr.appendChild(productImageTd);
-
                     // Create and append Category
                     const productCategoryTd = document.createElement('td');
                     productCategoryTd.textContent = product.category || ''; // Assuming there's a category field in product
@@ -282,6 +296,38 @@
                 console.error('Error fetching products:', error);
             });
         }
+
+        async function loadOrders() {
+            try {
+                const response = await fetch('/orders/orders');
+                const orders = await response.json();
+
+                const orderTableBody = document.querySelector('#orderTable tbody');
+
+                // Clear existing rows first
+                orderTableBody.innerHTML = '';
+
+                orders.forEach(order => {
+                    const tr = document.createElement('tr');
+                    
+                    // Add cells for each property
+                    tr.innerHTML = `
+                        <td>${order._id}</td>
+                        <td>${order.userId}</td>
+                        <td>${order.totalAmount}</td>
+                        <td>${order.orderDate}</td>
+                        <td>${order.status}</td>
+                        <!-- ... other columns? ... -->
+                    `;
+
+                    orderTableBody.appendChild(tr);
+                });
+
+            } catch (error) {
+                console.error('Error loading orders:', error);
+            }
+        }
+        window.onload = loadOrders;
 
 
 

@@ -2,8 +2,6 @@ const User = require('../models/userModel');
 const jwt = require('jsonwebtoken'); // Import JWT for authentication
 const bcrypt = require('bcryptjs'); // Import bcrypt for password hashing
 
-// Controller functions for managing users
-
 // Register a new user
 const registerUser = async (req, res) => {
   console.log("reaching registerUser");
@@ -17,11 +15,7 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ error: 'Email is already registered' });
     }
 
-    // Hash the user's password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    const newUser = new User({ name, email, password: hashedPassword });
+    const newUser = new User({ name, email, password });
     const savedUser = await newUser.save();
     
     // Generate a JWT token for authentication
@@ -34,35 +28,35 @@ const registerUser = async (req, res) => {
   }
 };
 
-// Login user
+//login user
 const loginUser = async (req, res) => {
-  console.log("reaching");
-  console.log(req.body);
   try {
     const { email, password } = req.body;
 
-    // Find the user by email
-    const user = await User.findOne({ email });
-
-    // Check if the user exists and the password is correct
+    const user = await User.findOne({ email }).select('+password');
+    
     if (!user) {
-      return res.status(401).json({ error: 'Invalid email or password' });
+      return res.status(401).json({ success: false, error: 'User not found' });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      return res.status(401).json({ error: 'Invalid email or password' });
+    if (password !== user.password) {
+      return res.status(401).json({ success: false, error: 'Invalid password' });
     }
- 
+
     // Generate a JWT token for authentication
     const token = jwt.sign({ userId: user._id }, 'our-secret-key', { expiresIn: '1h' });
 
-    res.status(200).json({ user, token });
+    // Return the token, user details (without password)
+    res.status(200).json({ success: true, user: { ...user._doc, password: undefined }, token });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ success: false, error: 'Internal server error' });
   }
 };
+
+
+
+
 
 // Update user profile
 const updateUserProfile = async (req, res) => {

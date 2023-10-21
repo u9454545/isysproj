@@ -27,34 +27,29 @@ const getAllProductsID = async (req, res) => {
   }
 };
 
-// Route to add a new product (admin only)
+// Route to add a new product
 const postNewProduct = async (req, res) => {
-  // Check if the user making the request is an admin
-  if (!req.user || !req.user.isAdmin) {
-    return res.status(403).json({ message: 'Forbidden: Admin access required' });
-  }
-
-  const newProduct = new Product({
-    name: req.body.name,
-    description: req.body.description,
-    price: req.body.price,
-    // Add other product details as needed
-  });
-
   try {
+    const newProduct = new Product({
+      productId: req.body.productId,
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      category: req.body.category
+    });
+
     const savedProduct = await newProduct.save();
     res.json(savedProduct);
   } catch (err) {
-    res.status(500).json({ message: 'Internal Server Error' });
+    console.error(err);
+    res.status(500).json({ message: 'Internal Server Error', error: err.message });
   }
 };
 
-// Route to update a product (admin only)
+
+
+// Route to update a product 
 const putUpdateProduct = async (req, res) => {
-  // Check if the user making the request is an admin
-  if (!req.user || !req.user.isAdmin) {
-    return res.status(403).json({ message: 'Forbidden: Admin access required' });
-  }
 
   try {
     const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -69,10 +64,6 @@ const putUpdateProduct = async (req, res) => {
 
 // Route to delete a product (admin only)
 const deleteProduct = async (req, res) => {
-  // Check if the user making the request is an admin
-  if (!req.user || !req.user.isAdmin) {
-    return res.status(403).json({ message: 'Forbidden: Admin access required' });
-  }
 
   try {
     const deletedProduct = await Product.findByIdAndRemove(req.params.id);

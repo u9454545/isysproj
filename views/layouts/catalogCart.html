@@ -80,6 +80,42 @@
         <!-- other products -->
 
         <div class="otherContainer">
+            <div class="secondHead">
+                <h1>OTHER ITEMS</h1>
+                <select id="productFilter">
+                    <option value="all">All</option>
+                    <option value="shirt">Shirts</option>
+                    <option value="shoes">Shoes</option>
+                    <option value="shorts">Shorts</option>
+                </select>
+            </div>
+
+            <div class="listProduct">
+                <div class="item">
+                    <img src="resources/activities/5.png">
+                    <h2>ULTIMATE BEAST SHIRT</h2>
+                    <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna.</a>
+                    <div class="price">$100</div>
+                    <button>Add To Cart</button>
+                </div>
+                <div class="item">
+                    <img src="resources/activities/4.png">
+                    <h2>WINGAURDIAN LEVIOSAS</h2>
+                    <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna.</a>
+                    <div class="price">$200</div>
+                    <button>Add To Cart</button>
+                </div>
+                <div class="item">
+                    <img src="resources/activities/6.png">
+                    <h2>MONEY MAYWEATHER SHORTS</h2>
+                    <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna.</a>
+                    <div class="price">$150</div>
+                    <button>Add To Cart</button>
+                </div>
+            </div>
             <div class="line-1"></div>
         </div>
 
@@ -92,11 +128,11 @@
                     <img src="resources/activities/5.png">
                     <div class="content">
                         <div class="name">Product Name</div>
-                        <div class="price">$50/1 product</div>
+                        <div class="price">$50</div>
                     </div>
                     <div class="quantity">
                         <button>- </button>
-                        <span class="value">3</span>
+                        <span class="value">1</span>
                         <button>+ </button>
                     </div>
                 </div>
@@ -199,6 +235,52 @@
                     });
                 }
             }
+
+            document.addEventListener("DOMContentLoaded", function() {
+                // Fetch products on page load
+                fetchProducts();
+
+                // Filter products
+                document.querySelectorAll('.productFilter').forEach(filter => {
+                    filter.addEventListener('change', function() {
+                        fetchProducts(this.value);
+                    });
+                });
+            });
+
+            function fetchProducts(filterType = 'all') {
+                fetch('/products/products')
+                    .then(response => response.json())
+                    .then(products => {
+                        let listProductHTML = document.querySelectorAll('.otherContainer .listProduct')[0];  // Target the second container
+                        listProductHTML.innerHTML = '';  // Clear existing products
+
+                        products.forEach(product => {
+                            // If filter matches product category or filter is 'all'
+                            if(product.category === filterType || filterType === 'all') {
+                                let newProduct = document.createElement('div');
+                                newProduct.classList.add('item');
+
+                                newProduct.innerHTML = `
+                                    <img src="${product.description}" alt="${product.name}">
+                                    <h2>${product.name}</h2>
+                                    <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna.</a>
+                                    <div class="price">$${product.price}</div>
+                                    <button onclick="addCart(${product.id})">Add To Cart</button>
+                                `;
+                                listProductHTML.appendChild(newProduct);
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error("There was an error fetching products:", error);
+                    });
+            }
+
+
+
+
         </script>
     </body>
 </html>

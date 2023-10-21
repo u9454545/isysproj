@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 6,
+        minlength: 3,
         select: false
     },
     role: {
@@ -41,13 +41,13 @@ const UserSchema = new mongoose.Schema({
 });
 
 // Middleware to hash password before user save
-UserSchema.pre('save', async function(next) {
+/*UserSchema.pre('save', async function(next) {
     if (!this.isModified('password')) return next();
 
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
     next();
-});
+});*/
 
 // Middleware to set updatedAt before user save
 UserSchema.pre('save', function(next) {

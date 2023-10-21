@@ -17,15 +17,6 @@ const ProductSchema = new mongoose.Schema({
         required: true,
         min: [0, 'Price can not be less than 0.']
     },
-    stockQuantity: {
-        type: Number,
-        required: true,
-        min: [0, 'Stock quantity can not be less than 0.']
-    },
-    imageUrl: {
-        type: String,
-        trim: true
-    },
     category: {
         type: String,
         trim: true
