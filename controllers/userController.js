@@ -124,6 +124,7 @@ const getUserById = async (req, res) => {
 
 // Delete a user by ID
 const deleteUser = async (req, res) => {
+  console.log(req.params)
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
     if (!deletedUser) {
