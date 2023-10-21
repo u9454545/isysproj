@@ -18,34 +18,47 @@ close.addEventListener('click', ()=>{
 })
 
 let products = null;
-fetch('catalogCart.json')
-    .then(response => response.json())
-    .then(data => {
-        products = data;
-        addDataToHTML();
-})
 
-function addDataToHTML(){
-    let listProductHTML = document.querySelector('.listProduct');
+// Function to fetch products
+function fetchProducts() {
+    fetch(`/products/products`)
+        .then(response => response.json())
+        .then(data => {
+            products = data;
+            addDataToHTML();
+        })
+        .catch(error => {
+            console.error('Error fetching products:', error);
+        });
+}
+
+// Function to add products to the HTML
+function addDataToHTML() {
+    let listProductHTML = document.querySelector('#productList');
     listProductHTML.innerHTML = '';
-    if(products != null) 
-    {
+    let selectedType = document.getElementById('productFilter').value;
+
+    if (products != null) {
         products.forEach(product => {
-            let newProduct = document.createElement('div');
-            newProduct.classList.add('item');
-            newProduct.innerHTML = 
-            `<img src="${product.image}" alt="">
-            <h2>${product.name}</h2>
-            <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-            sed do eiusmod tempor incididunt ut labore et dolore magna.</a>
-            <div class="price">$${product.price}</div>
-            <button onclick="addCart(${product.id})">Add To Cart</button>`;
+            if (product.type === selectedType || selectedType === 'all') {
+                let newProduct = document.createElement('div');
+                newProduct.classList.add('item');
+                newProduct.innerHTML =
+                    `<img src="${product.image}" alt="">
+                    <h2>${product.name}</h2>
+                    <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                    sed do eiusmod tempor incididunt ut labore et dolore magna.</a>
+                    <div class="price">$${product.price}</div>
+                    <button onclick="addCart(${product.id})">Add To Cart</button>`;
 
-            listProductHTML.appendChild(newProduct);
-
+                listProductHTML.appendChild(newProduct);
+            }
         });
     }
 }
+
+// Initial fetch of products
+fetchProducts();
 
 
 let listCart = [];

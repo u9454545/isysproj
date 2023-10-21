@@ -11,12 +11,12 @@ const addToCart = (req, res) => {
   const quantity = parseInt(req.body.quantity); 
 
   // Check if the product exists in the cart
-  Cart.findOne({ user: req.user._id }) 
+  Cart.findOne({ user: req.params.id }) 
     .then((cart) => {
       if (!cart) {
         // If the user doesn't have a cart yet, create a new cart
         const newCart = new Cart({
-          user: req.user._id,
+          user:req.params.id,
           items: [{ product: productId, quantity: quantity }],
         });
 
@@ -49,7 +49,7 @@ const updateCart = (req, res) => {
   const quantity = parseInt(req.body.quantity); 
 
   // Find the user's cart
-  Cart.findOne({ user: req.user._id }) 
+  Cart.findOne({ user: req.params.id }) 
     .then((cart) => {
       if (!cart) {
         return res.status(404).json({ message: 'Cart not found' });
@@ -77,7 +77,7 @@ const removeFromCart = (req, res) => {
   const productId = req.params.productId; 
 
   // Find the user's cart
-  Cart.findOne({ user: req.user._id }) 
+  Cart.findOne({ user: req.params.id }) 
     .then((cart) => {
       if (!cart) {
         return res.status(404).json({ message: 'Cart not found' });
@@ -100,11 +100,16 @@ const removeFromCart = (req, res) => {
     .catch((err) => res.status(500).json({ error: err.message }));
 };
 const getCart = (req, res) => {
-  Cart.findOne({ user: req.user._id }) 
+  console.log("i am here in get cart")
+  console.log(req.params.id)
+  const userId = req.params.id;
+  Cart.findOne({user: userId }) 
     .then((cart) => {
       if (!cart) {
+        console.log("inside cart not found");
         return res.status(404).json({ message: 'Cart not found' });
       }
+      console.log("outside cart not found");
 
      
       const filePath = path.join(__dirname, '../views/templates/cart.html');

@@ -22,7 +22,11 @@ console.log(generateSecretKey());
 
 // User authentication (login)
 const authenticateUser = async (req, res) => {
+  console.log("i am inside authentication")
+  console.log(req.body.password);
+  
   try {
+    console.log("before everything")
     // Extract user credentials from the request body
     const { username, password } = req.body;
 
@@ -33,7 +37,7 @@ const authenticateUser = async (req, res) => {
     if (!user) {
       return res.status(401).json({ message: 'Authentication failed. User not found.' });
     }
-
+    console.log("before checking")
     // Compare the provided password with the hashed password in the database
     const passwordMatch = await bcrypt.compare(password, user.password);
 
@@ -91,6 +95,7 @@ const authoriseUser = (req, res, next) => {
     return res.status(500).json({ message: 'Internal server error' });
   }
 };
+
 const registerUser = async (req, res) => {
   try {
     // Extract user registration data from the request body

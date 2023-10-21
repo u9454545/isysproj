@@ -1,16 +1,19 @@
 let listCart = [];
-function checkCart(){
-        var cookieValue = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('listCart='));
-        if(cookieValue){
-            listCart = JSON.parse(cookieValue.split('=')[1]);
-        }
+
+async function fetchCart() {
+    const response = await fetch('/cart/cart');
+    const cartData = await response.json();
+    return cartData;
 }
-checkCart();
-addCartToHTML();
+
+function checkCart() {
+    fetchCart().then(cartData => {
+        listCart = cartData;
+        addCartToHTML();
+    });
+}
+
 function addCartToHTML(){
-    // clear data default
     let listCartHTML = document.querySelector('.returnCart .list');
     listCartHTML.innerHTML = '';
 
@@ -18,7 +21,7 @@ function addCartToHTML(){
     let totalPriceHTML = document.querySelector('.totalPrice');
     let totalQuantity = 0;
     let totalPrice = 0;
-    // if has product in Cart
+
     if(listCart){
         listCart.forEach(product => {
             if(product){
@@ -33,12 +36,31 @@ function addCartToHTML(){
                     <div class="quantity">${product.quantity}</div>
                     <div class="returnPrice">$${product.price * product.quantity}</div>`;
                 listCartHTML.appendChild(newCart);
-                totalQuantity = totalQuantity + product.quantity;
-                totalPrice = totalPrice + (product.price * product.quantity);
+                totalQuantity += product.quantity;
+                totalPrice += product.price * product.quantity;
             }
-        })
+        });
     }
+
     totalQuantityHTML.innerText = totalQuantity;
     totalPriceHTML.innerText = '$' + totalPrice;
     return totalPrice;
 }
+
+// Add a function for updating cart (this is just an example)
+async function updateProductInCart(productId, updatedQuantity) {
+    const response = await fetch(`/cart/cart/update/${productId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            quantity: updatedQuantity
+        })
+    });
+    if (response.ok) {
+        checkCart();
+    }
+}
+
+checkCart();
