@@ -40,9 +40,10 @@
         URL: <textarea id="productDescription"></textarea><br>
         Category: <input type="text" id="productCategory"><br>
 
-        <button type="button" onclick="addProduct()">Add Product</button>
-        <button type="button" onclick="updateProduct()">Update Product</button>
-        <button type="button" onclick="deleteProduct()">Delete Product</button>
+        <button type="button" id="addOrderButton">Add Order</button>
+        <button type="button" id="updateOrderStatusButton">Update Order Status</button>
+        <button type="button" id="deleteOrderButton">Delete Order</button>
+
     </form>
 
     <!-- Manage Orders -->
@@ -65,10 +66,15 @@
     </table>
 
     <form id="orderForm">
-        Order ID: <input type="text" id="orderId"><br>
-        New Status: <input type="text" id="orderStatus"><br>
-        <button type="button" onclick="updateOrderStatus()">Update Order Status</button>
+        Order ID: <input type="text" id="orderId" name="orderId"><br>
+        User ID: <input type="text" id="userId" name="userId"><br>
+        Total Amount: <input type="number" id="totalAmount" name="totalAmount"><br>
+        New Status: <input type="text" id="orderStatus" name="orderStatus"><br>
+        <button type="submit">Add Order</button>
+        <button type="submit">Update Order Status</button>
+        <button type="submit">Delete Order</button>
     </form>
+    
 
     <!-- Manage User Accounts -->
     <h2>Manage User Accounts</h2>
@@ -317,7 +323,6 @@
                         <td>${order.totalAmount}</td>
                         <td>${order.orderDate}</td>
                         <td>${order.status}</td>
-                        <!-- ... other columns? ... -->
                     `;
 
                     orderTableBody.appendChild(tr);

@@ -6,21 +6,14 @@ const Order = require('../models/orderModel');
 // Place a new order
 const placeOrder = async (req, res) => {
   try {
-    const { customerName, items } = req.body;
+    const { userId, products, totalAmount } = req.body;
 
-    // Create a new order
-    const order = new Order({
-      customerName,
-      items,
-      status: 'Pending', // Initial status when placing the order
-    });
-
-    // Save the order to the database
+    const order = new Order({ userId, products, totalAmount, status: 'Pending' });
     const savedOrder = await order.save();
 
     res.status(201).json(savedOrder);
   } catch (error) {
-    console.error('Error placing order:', error);
+    console.error('Error placing order: orderController', error);
     res.status(500).json({ error: 'Failed to place the order' });
   }
 };

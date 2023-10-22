@@ -1,20 +1,24 @@
 let iconCart = document.querySelector('.iconCart');
 let cart = document.querySelector('.cart');
 let container = document.querySelector('.container');
+let otherContainer = document.querySelector('.otherContainer');
 let close = document.querySelector('.close');
 
-iconCart.addEventListener('click', ()=>{
-    if(cart.style.right =='-100%'){
+iconCart.addEventListener('click', () => {
+    if(cart.style.right == '-100%'){
         cart.style.right = '0';
-        container.style.transform ='translateX(-200px)';
+        container.style.transform = 'translateX(-200px)';
+        otherContainer.style.transform = 'translateX(-200px)'; // Add this line
     } else {
-        cart.style.right ='-100%';
-        container.style.transform ='translateX(0)';
+        cart.style.right = '-100%';
+        container.style.transform = 'translateX(0)';
+        otherContainer.style.transform = 'translateX(0)'; // And this line
     }
 })
-close.addEventListener('click', ()=>{
-    cart.style.right='-100%';
-    container.style.transform='translateX(0)';
+close.addEventListener('click', () => {
+    cart.style.right = '-100%';
+    container.style.transform = 'translateX(0)';
+    otherContainer.style.transform = 'translateX(0)'; // Add this line
 })
 
 let products = null;
