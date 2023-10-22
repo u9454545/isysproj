@@ -31,7 +31,7 @@
             </div>
         </section>
 
-        <!-- popular products container (add filter)-->
+        <!-- popular products container -->
         <div class="container">
             <div class="secondHead">
                 <h1>POPULAR ITEMS</h1>
@@ -41,13 +41,11 @@
                     <option value="shoes">Shoes</option>
                     <option value="shorts">Shorts</option>
                 </select>
-                
                 <div class="iconCart">
                     <img src="resources/shoppingCart.png" alt="">
                     <div class="totalQuantity">0</div>
                 </div>
             </div>
-
             <div class="listProduct">
                 <div class="item">
                     <img src="resources/activities/5.png">
@@ -78,7 +76,6 @@
         </div>
 
         <!-- other products -->
-
         <div class="otherContainer">
             <div class="secondHead">
                 <h1>OTHER ITEMS</h1>
@@ -119,7 +116,6 @@
             <div class="line-1"></div>
         </div>
 
-
         <!-- cart section-->
         <div class="cart">
             <h2>YOUR FREAK CART</h2>
@@ -145,8 +141,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <!-- footer --> 
         <div class="footer">
@@ -239,9 +233,7 @@
             }
 
             document.addEventListener("DOMContentLoaded", function() {
-                // Fetch products on page load
                 fetchProducts();
-
                 // Filter products
                 document.querySelectorAll('.productFilter').forEach(filter => {
                     filter.addEventListener('change', function() {
@@ -255,14 +247,12 @@
                     .then(response => response.json())
                     .then(products => {
                         let listProductHTML = document.querySelectorAll('.otherContainer .listProduct')[0];  // Target the second container
-                        listProductHTML.innerHTML = '';  // Clear existing products
+                        listProductHTML.innerHTML = ''; 
 
                         products.forEach(product => {
-                            // If filter matches product category or filter is 'all'
                             if(product.category === filterType || filterType === 'all') {
                                 let newProduct = document.createElement('div');
                                 newProduct.classList.add('item');
-
                                 newProduct.innerHTML = `
                                     <img src="${product.description}" alt="${product.name}">
                                     <h2>${product.name}</h2>
@@ -279,10 +269,6 @@
                         console.error("There was an error fetching products:", error);
                     });
             }
-
-
-
-
         </script>
     </body>
 </html>

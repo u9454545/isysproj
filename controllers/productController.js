@@ -1,9 +1,8 @@
-// Import necessary modules and dependencies
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/productModel');
 
-// Route to get a list of all products
+// return all products
 const getAllProducts = async (req, res) => {
   console.log('reaching get all products')
   try {
@@ -14,10 +13,10 @@ const getAllProducts = async (req, res) => {
   }
 };
 
-// Route to get details of a specific product by ID
+// return product by ID
 const getAllProductsID = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id); // Fetch product by ID
+    const product = await Product.findById(req.params.id); 
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
@@ -27,7 +26,7 @@ const getAllProductsID = async (req, res) => {
   }
 };
 
-// Route to add a new product
+// Add new product to database
 const postNewProduct = async (req, res) => {
   try {
     const newProduct = new Product({
@@ -46,9 +45,7 @@ const postNewProduct = async (req, res) => {
   }
 };
 
-
-
-// Route to update a product 
+// update product in the database
 const putUpdateProduct = async (req, res) => {
 
   try {
@@ -62,9 +59,8 @@ const putUpdateProduct = async (req, res) => {
   }
 };
 
-// Route to delete a product (admin only)
+// delete product in databse
 const deleteProduct = async (req, res) => {
-
   try {
     const deletedProduct = await Product.findByIdAndRemove(req.params.id);
     if (!deletedProduct) {

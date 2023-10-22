@@ -42,9 +42,6 @@ const orderRoutes = require('./routes/orderRoutes');
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes');
 
-// Using the route modules 
-app.use('/admin', adminRoutes);
-app.use('/auth', authRoutes);
 app.use('/cart', cartRoutes);
 app.use('/orders', orderRoutes);
 app.use('/products', productRoutes);
@@ -52,8 +49,6 @@ app.use('/users', userRoutes);
 
 const dotenv = require('dotenv');
 dotenv.config({path: './config.env'});
-//const mongoose = require('mongoose');
-//const app = require('./app');
 
 
 console.log(process.env);
@@ -63,7 +58,6 @@ console.log(process.env);
 mongoose.connect(process.env.CONN_STR, {
     useNewUrlParser: true
 }).then((conn) => {
-    //console.log(conn);
     console.log('DB Connection Successful');
 }).catch((error) => {
     console.log('Some error has occured');

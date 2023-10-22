@@ -8,7 +8,6 @@
 
 </head>
 <body>
-
     <h1>Admin Dashboard</h1>
     <div class="logoutButton">
         <button onclick="logout()">Logout</button>
@@ -16,7 +15,6 @@
 
     <!-- Manage Products -->
     <h2>Manage Products</h2>
-
     <table id="productTable">
         <thead>
             <tr>
@@ -25,11 +23,10 @@
                 <th>URL</th>
                 <th>Price</th>
                 <th>Category</th>
-                <!-- do we need more? -->
             </tr>
         </thead>
         <tbody>
-            <!-- dynamic adding stuff -->
+            <!-- load stuff here-->
         </tbody>
     </table>
 
@@ -39,16 +36,13 @@
         Price: <input type="number" id="productPrice"><br>
         URL: <textarea id="productDescription"></textarea><br>
         Category: <input type="text" id="productCategory"><br>
-
         <button type="button" id="addOrderButton">Add Order</button>
         <button type="button" id="updateOrderStatusButton">Update Order Status</button>
         <button type="button" id="deleteOrderButton">Delete Order</button>
-
     </form>
 
     <!-- Manage Orders -->
     <h2>Manage Orders</h2>
-
     <table id="orderTable">
         <thead>
             <tr>
@@ -57,11 +51,10 @@
                 <th>Total Amount</th>
                 <th>Order Date</th>
                 <th>Status</th>
-                <!-- ... other columns? ... -->
             </tr>
         </thead>
         <tbody>
-            <!-- dynamic add -->
+            <!-- load stuff here -->
         </tbody>
     </table>
 
@@ -83,11 +76,10 @@
                 <th>Role</th>
                 <th>Account Created</th>
                 <th>Account Updated</th>
-                <!-- other cols? -->
             </tr>
         </thead>
         <tbody>
-            <!-- dynamic add -->
+            <!-- load stuff here-->
         </tbody>
     </table>
 
@@ -95,9 +87,6 @@
         User ID: <input type="text" id="userId"><br>
         <button type="button" onclick="deleteUserFromServer()">Delete User</button>
     </form>
-
-
-
 
     <script>
     document.getElementById('addOrderButton').addEventListener('click', addProduct);
@@ -175,7 +164,7 @@
     }
     </script>
     
-    <!-- other functions -->
+    <!-- dynamic loading tables -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             fetch('/users/users')
@@ -190,31 +179,24 @@
 
                     users.forEach(user => {
                         const tr = document.createElement('tr');
-
                         const userIdTd = document.createElement('td');
                         userIdTd.textContent = user._id;
                         tr.appendChild(userIdTd);
-
                         const nameTd = document.createElement('td');
                         nameTd.textContent = user.name;
                         tr.appendChild(nameTd);
-
                         const emailTd = document.createElement('td');
                         emailTd.textContent = user.email;
                         tr.appendChild(emailTd);
-
                         const roleTd = document.createElement('td');
                         roleTd.textContent = user.role;
                         tr.appendChild(roleTd);
-
                         const createdAtTd = document.createElement('td');
                         createdAtTd.textContent = new Date(user.createdAt).toLocaleString();
                         tr.appendChild(createdAtTd);
-
                         const updatedAtTd = document.createElement('td');
                         updatedAtTd.textContent = new Date(user.updatedAt).toLocaleString();
                         tr.appendChild(updatedAtTd);
-
                         tbody.appendChild(tr);
                     });
                 })
@@ -225,19 +207,15 @@
 
         async function deleteUserFromServer() {
             const userId = document.getElementById('userId').value;
-
             if (!userId) {
                 alert('Please enter a User ID');
                 return;
             }
-
             try {
                 const response = await fetch(`/users/users/${userId}`, {
                     method: 'DELETE'
                 });
-
                 const data = await response.json();
-
                 if (response.ok) {
                     alert(data.message);
                 } else {
@@ -253,7 +231,7 @@
         });
 
         function fetchProductsAndPopulateTable() {
-            fetch('/products/products') // The route to get all products
+            fetch('/products/products')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -262,35 +240,23 @@
             })
             .then(products => {
                 const tbody = document.querySelector('#productTable tbody');
-                
                 products.forEach(product => {
                     const tr = document.createElement('tr');
-
-                    // Create and append product ID
                     const productIdTd = document.createElement('td');
-                    productIdTd.textContent = product._id || ''; // Assuming the product has an _id field
+                    productIdTd.textContent = product._id || ''; 
                     tr.appendChild(productIdTd);
-
-                    // Create and append product Name
                     const productNameTd = document.createElement('td');
                     productNameTd.textContent = product.name || '';
                     tr.appendChild(productNameTd);
-
-                    // Create and append product Description
                     const productDescriptionTd = document.createElement('td');
                     productDescriptionTd.textContent = product.description || '';
                     tr.appendChild(productDescriptionTd);
-
-                    // Create and append product Price
                     const productPriceTd = document.createElement('td');
                     productPriceTd.textContent = product.price || '';
                     tr.appendChild(productPriceTd);
-                    // Create and append Category
                     const productCategoryTd = document.createElement('td');
-                    productCategoryTd.textContent = product.category || ''; // Assuming there's a category field in product
+                    productCategoryTd.textContent = product.category || ''; 
                     tr.appendChild(productCategoryTd);
-
-                    // Append the entire row to the tbody
                     tbody.appendChild(tr);
                 });
             })
@@ -298,9 +264,6 @@
                 console.error('Error fetching products:', error);
             });
         }
-
-
-
     </script>
 </body>
 </html>

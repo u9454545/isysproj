@@ -218,10 +218,10 @@ input{
     background: black;
   }
   #submitFormBtn {
-    width: 100%; /* Adjust width as needed */
+    width: 100%;
     padding: 10px 15px;
-    background-color: rgb(255, 116, 197); /* Background color */
-    color: #fff; /* Text color */
+    background-color: rgb(255, 116, 197); 
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -231,5 +231,5 @@ input{
 }
 
 #submitFormBtn:hover {
-    background-color: rgb(255, 133, 204); /* Slightly lighter on hover */
+    background-color: rgb(255, 213, 238); 
 }

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Define the cart item schema - This is a subdocument inside the cart
+// cart item schema
 const CartItemSchema = new mongoose.Schema({
     productId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -16,17 +16,17 @@ const CartItemSchema = new mongoose.Schema({
         type: Number,
         required: true
     }
-}, { _id: false }); // Prevents addition of an _id field to each subdocument
+}, { _id: false });
 
-// Define the cart schema
+// Define cart schema
 const CartSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User', 
         required: true,
-        unique: true // Ensure one cart per user
+        unique: true 
     },
-    items: [CartItemSchema], // Array of cart items
+    items: [CartItemSchema],
     totalAmount: {
         type: Number,
         required: true
@@ -37,7 +37,6 @@ const CartSchema = new mongoose.Schema({
     }
 });
 
-// Create the model based on the schema
 const Cart = mongoose.model('Cart', CartSchema);
 
 module.exports = Cart;

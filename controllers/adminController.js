@@ -1,4 +1,4 @@
-// Import necessary modules and models
+/*// Import necessary modules and models
 const Product = require('../models/productModel'); // Import the Product model
 const Order = require('../models/orderModel'); // Import the Order model
 const User = require('../models/userModel'); // Import the User model
@@ -88,4 +88,7 @@ module.exports = {
   manageOrders,
   manageUserAccounts,
   getDashboard,
-};
+};*/
+
+
+// delete this entire bitch

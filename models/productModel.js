@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Define the product schema
+// Define product schema
 const ProductSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -31,13 +31,11 @@ const ProductSchema = new mongoose.Schema({
     }
 });
 
-// Middleware to set updatedAt before product save
 ProductSchema.pre('save', function(next) {
     this.updatedAt = Date.now();
     next();
 });
 
-// Create the model based on the schema
 const Product = mongoose.model('Product', ProductSchema);
 
 module.exports = Product;

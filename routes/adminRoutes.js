@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/adminController');
 
@@ -9,3 +9,4 @@ router.get('/admin/orders', adminController.manageOrders);
 router.get('/admin/user-accounts', adminController.manageUserAccounts); 
 
 module.exports = router;
+*/

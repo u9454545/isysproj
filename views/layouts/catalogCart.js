@@ -8,17 +8,17 @@ iconCart.addEventListener('click', () => {
     if(cart.style.right == '-100%'){
         cart.style.right = '0';
         container.style.transform = 'translateX(-200px)';
-        otherContainer.style.transform = 'translateX(-200px)'; // Add this line
+        otherContainer.style.transform = 'translateX(-200px)';
     } else {
         cart.style.right = '-100%';
         container.style.transform = 'translateX(0)';
-        otherContainer.style.transform = 'translateX(0)'; // And this line
+        otherContainer.style.transform = 'translateX(0)';
     }
 })
 close.addEventListener('click', () => {
     cart.style.right = '-100%';
     container.style.transform = 'translateX(0)';
-    otherContainer.style.transform = 'translateX(0)'; // Add this line
+    otherContainer.style.transform = 'translateX(0)';
 })
 
 let products = null;
@@ -44,13 +44,10 @@ function addDataToHTML(){
             sed do eiusmod tempor incididunt ut labore et dolore magna.</a>
             <div class="price">$${product.price}</div>
             <button onclick="addCart(${product.id})">Add To Cart</button>`;
-
             listProductHTML.appendChild(newProduct);
-
         });
     }
 }
-
 
 let listCart = [];
 function checkCart(){

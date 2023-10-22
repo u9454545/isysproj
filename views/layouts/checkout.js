@@ -18,7 +18,7 @@ function addCartToHTML(){
     let totalPriceHTML = document.querySelector('.totalPrice');
     let totalQuantity = 0;
     let totalPrice = 0;
-    // if has product in Cart
+    // if has product in the current Cart, fetch and insert into checkout cart
     if(listCart){
         listCart.forEach(product => {
             if(product){

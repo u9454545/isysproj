@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-// Define the user schema
+// Define user schema
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -40,16 +40,6 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
-// Middleware to hash password before user save
-/*UserSchema.pre('save', async function(next) {
-    if (!this.isModified('password')) return next();
-
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-});*/
-
-// Middleware to set updatedAt before user save
 UserSchema.pre('save', function(next) {
     if (this.isModified('password') || this.isNew) {
         this.updatedAt = Date.now();
@@ -57,12 +47,10 @@ UserSchema.pre('save', function(next) {
     next();
 });
 
-// Add method to compare passwords
 UserSchema.methods.comparePassword = async function(candidatePassword) {
     return await bcrypt.compare(candidatePassword, this.password);
 };
 
-// Create the model based on the schema
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const ProductSchema = new mongoose.Schema({
     productId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -16,15 +15,15 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         required: true
     }
-}, { _id: false }); // Prevents addition of an _id field to each subdocument
+}, { _id: false }); 
 
-// Define the order schema
+// Order schema
 const OrderSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User', 
     },
-    products: [ProductSchema], // Array of product subdocuments
+    products: [ProductSchema], 
     totalAmount: {
         type: Number,
         required: true
@@ -40,7 +39,6 @@ const OrderSchema = new mongoose.Schema({
     }
 });
 
-// Create the model based on the schema
 const Order = mongoose.model('Order', OrderSchema);
 
 module.exports = Order;

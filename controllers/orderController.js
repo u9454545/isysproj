@@ -1,9 +1,6 @@
-// Import necessary modules and models
 const Order = require('../models/orderModel');
 
-// Controller functions for managing orders
-
-// Place a new order
+// Place order
 const placeOrder = async (req, res) => {
   try {
     const { userId, products, totalAmount } = req.body;
@@ -22,14 +19,10 @@ const placeOrder = async (req, res) => {
 const getOrderById = async (req, res) => {
   try {
     const orderId = req.params.id;
-
-    // Find the order by ID
     const order = await Order.findById(orderId);
-
     if (!order) {
       return res.status(404).json({ error: 'Order not found' });
     }
-
     res.status(200).json(order);
   } catch (error) {
     console.error('Error getting order by ID:', error);
@@ -41,10 +34,7 @@ const getOrderById = async (req, res) => {
 const getOrderHistory = async (req, res) => {
   try {
     const userId = req.user.id; 
-
-    // Find all orders for the user
     const orders = await Order.find({ customer: userId });
-
     res.status(200).json(orders);
   } catch (error) {
     console.error('Error getting order history:', error);
@@ -52,23 +42,19 @@ const getOrderHistory = async (req, res) => {
   }
 };
 
-// Update order status (for administrators)
+// Update order status
 const updateOrderStatus = async (req, res) => {
   try {
     const orderId = req.params.id;
     const { status } = req.body;
-
-    // Find the order by ID and update its status
     const updatedOrder = await Order.findByIdAndUpdate(
       orderId,
       { status },
       { new: true }
     );
-
     if (!updatedOrder) {
       return res.status(404).json({ error: 'Order not found' });
     }
-
     res.status(200).json(updatedOrder);
   } catch (error) {
     console.error('Error updating order status:', error);
@@ -76,22 +62,18 @@ const updateOrderStatus = async (req, res) => {
   }
 };
 
-// Process order (for administrators)
+// Process order 
 const processOrder = async (req, res) => {
   try {
     const orderId = req.params.id;
-
-    // Find the order by ID and update its status to 'Processed'
     const processedOrder = await Order.findByIdAndUpdate(
       orderId,
       { status: 'Processed' },
       { new: true }
     );
-
     if (!processedOrder) {
       return res.status(404).json({ error: 'Order not found' });
     }
-
     res.status(200).json(processedOrder);
   } catch (error) {
     console.error('Error processing order:', error);
@@ -103,9 +85,7 @@ const processOrder = async (req, res) => {
 const getAllOrders = async (req, res) => {
   console.log("reaching get all orders");
   try {
-    // Find all orders
     const orders = await Order.find();
-
     res.status(200).json(orders);
   } catch (error) {
     console.error('Error getting all orders:', error);
@@ -117,14 +97,10 @@ const getAllOrders = async (req, res) => {
 const deleteOrder = async (req, res) => {
   try {
     const orderId = req.params.id;
-
-    // Find and delete the order by ID
     const deletedOrder = await Order.findByIdAndDelete(orderId);
-
     if (!deletedOrder) {
       return res.status(404).json({ error: 'Order not found' });
     }
-
     res.status(200).json(deletedOrder);
   } catch (error) {
     console.error('Error deleting order:', error);
