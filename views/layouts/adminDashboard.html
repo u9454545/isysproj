@@ -66,15 +66,10 @@
     </table>
 
     <form id="orderForm">
-        Order ID: <input type="text" id="orderId" name="orderId"><br>
-        User ID: <input type="text" id="userId" name="userId"><br>
-        Total Amount: <input type="number" id="totalAmount" name="totalAmount"><br>
-        New Status: <input type="text" id="orderStatus" name="orderStatus"><br>
-        <button type="submit">Add Order</button>
-        <button type="submit">Update Order Status</button>
-        <button type="submit">Delete Order</button>
+        Order ID: <input type="text" id="orderId"><br>
+        New Status: <input type="text" id="orderStatus"><br>
+        <button type="button" onclick="updateOrderStatus()">Update Order Status</button>
     </form>
-    
 
     <!-- Manage User Accounts -->
     <h2>Manage User Accounts</h2>
@@ -105,6 +100,10 @@
 
 
     <script>
+    document.getElementById('addOrderButton').addEventListener('click', addProduct);
+    document.getElementById('updateOrderStatusButton').addEventListener('click', updateProduct);
+    document.getElementById('deleteOrderButton').addEventListener('click', deleteProduct);
+
     async function addProduct() {
         const productId = document.getElementById('productId').value;
         const name = document.getElementById('productName').value;
@@ -149,21 +148,19 @@
 
     async function deleteProduct() {
         const productId = document.getElementById('productId').value;
-        await fetch(`/products/products/${productId}`, {  
+        await fetch(`/products/products/${productId}?action=delete`, {
             method: 'DELETE'
         });
     }
 
-
     async function updateOrderStatus() {
         const orderId = document.getElementById('orderId').value;
         const newStatus = document.getElementById('orderStatus').value;
-        await fetch(`/orders/orders/${orderId}`, {
+        await fetch(`/orders/orders/${orderId}?action=updateStatus`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ status: newStatus })
+            body: JSON.stringify({ newStatus })
         });
-
     }
 
     async function deleteUser() {
@@ -256,7 +253,7 @@
         });
 
         function fetchProductsAndPopulateTable() {
-            fetch('/products/products')
+            fetch('/products/products') // The route to get all products
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -271,7 +268,7 @@
 
                     // Create and append product ID
                     const productIdTd = document.createElement('td');
-                    productIdTd.textContent = product._id || ''; 
+                    productIdTd.textContent = product._id || ''; // Assuming the product has an _id field
                     tr.appendChild(productIdTd);
 
                     // Create and append product Name
@@ -288,7 +285,6 @@
                     const productPriceTd = document.createElement('td');
                     productPriceTd.textContent = product.price || '';
                     tr.appendChild(productPriceTd);
-
                     // Create and append Category
                     const productCategoryTd = document.createElement('td');
                     productCategoryTd.textContent = product.category || ''; // Assuming there's a category field in product
@@ -302,37 +298,6 @@
                 console.error('Error fetching products:', error);
             });
         }
-
-        async function loadOrders() {
-            try {
-                const response = await fetch('/orders/orders');
-                const orders = await response.json();
-
-                const orderTableBody = document.querySelector('#orderTable tbody');
-
-                // Clear existing rows first
-                orderTableBody.innerHTML = '';
-
-                orders.forEach(order => {
-                    const tr = document.createElement('tr');
-                    
-                    // Add cells for each property
-                    tr.innerHTML = `
-                        <td>${order._id}</td>
-                        <td>${order.userId}</td>
-                        <td>${order.totalAmount}</td>
-                        <td>${order.orderDate}</td>
-                        <td>${order.status}</td>
-                    `;
-
-                    orderTableBody.appendChild(tr);
-                });
-
-            } catch (error) {
-                console.error('Error loading orders:', error);
-            }
-        }
-        window.onload = loadOrders;
 
 
 
