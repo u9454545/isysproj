@@ -1,0 +1,57 @@
+.navbar {
+    margin-top: 20px;
+    text-align: center;
+}
+
+h1{
+    margin-left: 20px;
+}
+
+.navbar button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #B4E24C;
+}
+
+.navbar button {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    background-color: #333;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.orderHistory h2 {
+    margin-top: 0;
+}
+
+.orderList {
+    background: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    margin-left: 15px;
+}
+
+.orderItem {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+
+.orderName, .orderQuantity, .orderPrice, .orderTotal {
+    margin: 0;
+    padding: 2px 0;
+}
+
